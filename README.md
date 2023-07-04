@@ -7,7 +7,7 @@ To cluster GEO dataseries and produce a table with samples and their clusters su
 ```R
 sampleclusteR::geo.cluster("GSE84881")
 ```
-Conversely to cluster an ArrayExpress Sample and Data Relationship Format table for example the metadata for 
+Conversely to cluster an ArrayExpress dataset with its metadata formatted as a Sample and Data Relationship Format table; for example the metadata for 
 E-MTAB-11935; this can be achieved with
 ```R
 sampleclusteR::ArrayExpress.cluster("https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/935/E-MTAB-11935/Files/E-MTAB-11935.sdrf.txt")
