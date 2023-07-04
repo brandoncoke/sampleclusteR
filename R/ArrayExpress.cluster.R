@@ -2,7 +2,7 @@
 ArrayExpress.cluster= function(
     sdrf_loc= "https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/935/E-MTAB-11935/Files/E-MTAB-11935.sdrf.txt",
     broad_cluster= T,
-    consise= F){
+    consise= T){
   metadata= read.table(sdrf_loc, sep= "\t", header = T)
   metadata[is.na(metadata)]= ""
   sample_source= metadata$Source.Name
