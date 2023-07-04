@@ -2,8 +2,8 @@
 
 ## A Quick and efficient way of clustering and analysing samples from GEO datasets
 
-sampleclusteR allows users to quickly analyse datasets from Gene Expression Omnibus (GEO) and ArrayExpress metadata sets (via Sample and Data Relationship Format tables (.sdrf)) using a command line iterface producing a list of differentially expressed genes, metadata about the pairwise comparisons- the package functions as described in the diagram below. 
-To cluster and analyse a GEO dataseries such as GSE84881 a user can use
+sampleclusteR allows users to quickly analyse datasets from Gene Expression Omnibus (GEO) and ArrayExpress metadata sets (via Sample and Data Relationship Format tables (.sdrf)) using a command line interface.
+To cluster GEO dataseries and produce a table with samples and their clusters such as GSE84881 a user can use
 ```R
 sampleclusteR::geo.cluster("GSE84881")
 ```
