@@ -14,7 +14,7 @@ sampleclusteR::ArrayExpress.cluster("https://ftp.ebi.ac.uk/biostudies/fire/E-MTA
 ```
 Finally, sampleclusteR enables users to automate the generation of DEGs list for a given GEO data set via the supervised.analysis.
 ```R
-supervised.analysis(GEO_id= "GSE130402", meta_data_and_combined= T)
+sampleclusteR::supervised.analysis(GEO_id= "GSE130402", meta_data_and_combined= T)
 ```
 Unlike GEOracle which a R shinny app alternative sampleclusteR is solely a command line interface for automated clustering of samples. Here are some advantages of sampleclusteR:
 - Automatically cluster GEO, ArrayExpress  and user provided metadata on the command-line.
