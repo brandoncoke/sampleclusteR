@@ -3,10 +3,19 @@
 ## A Quick and efficient way of clustering and analysing samples from GEO datasets
 
 sampleclusteR allows users to quickly analyse datasets from Gene Expression Omnibus (GEO) and ArrayExpress metadata sets (via Sample and Data Relationship Format tables (.sdrf)) using a command line iterface producing a list of differentially expressed genes, metadata about the pairwise comparisons- the package functions as described in the diagram below. 
-To cluster and analyse a GEO dataseries such as GSE84881 a user can use ``` sampleclusteR::geo.cluster("GSE84881") ```. Conversely to cluster an ArrayExpress Sample and Data Relationship Format table for example the metadata for 
-E-MTAB-11935; this can be achieved with ``` sampleclusteR::ArrayExpress.cluster("https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/935/E-MTAB-11935/Files/E-MTAB-11935.sdrf.txt") ```
+To cluster and analyse a GEO dataseries such as GSE84881 a user can use
+```R
+sampleclusteR::geo.cluster("GSE84881")
+```
+Conversely to cluster an ArrayExpress Sample and Data Relationship Format table for example the metadata for 
+E-MTAB-11935; this can be achieved with
+```R
+sampleclusteR::ArrayExpress.cluster("https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/935/E-MTAB-11935/Files/E-MTAB-11935.sdrf.txt")
+```
 Finally, sampleclusteR enables users to automate the generation of DEGs list for a given GEO data set via the supervised.analysis.
-``` supervised.analysis(GEO_id= "GSE130402", meta_data_and_combined= T) ```
+```R
+supervised.analysis(GEO_id= "GSE130402", meta_data_and_combined= T)
+```
 Unlike GEOracle which a R shinny app alternative sampleclusteR is solely a command line interface for automated clustering of samples. Here are some advantages of sampleclusteR:
 - Automatically cluster GEO, ArrayExpress  and user provided metadata on the command-line.
 - Significantly lower disk requirements and dependencies  to install and use the package compared to GEOracle
