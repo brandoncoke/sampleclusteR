@@ -1,0 +1,6 @@
+import(cluster)
+import(BiocManager)
+import(GEOquery)
+import(rockchalk)
+import(limma)
+exportPattern("^[[:alpha:]]+")

@@ -1,0 +1,14 @@
+Package: sampleclusteR
+Type: Package
+Title: Automate clustering of samples from GEO datasets
+Version: 1.00
+Author: Brandon Coke
+Maintainer: Brandon Coke <bc6g20@soton.ac.uk>
+Description: Command-line interface for automated analysis of a number of GEO and ArrayExpress datasets for large scale metanalyses.
+License: GPL3
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.6.0), rockchalk, cluster, stats, methods, Biobase, BiocManager, limma, GEOquery
+Imports: rockchalk, cluster, limma, GEOquery
+Suggests: Rmpfr, gmp, RankProd
+Config/testthat/edition: 3
