@@ -1,10 +1,10 @@
 Package: sampleclusteR
 Type: Package
-Title: Automate clustering of samples from GEO datasets
+Title: Automate sample clustering from GEO and ArrayExpress datasets
 Version: 1.00
 Author: Brandon Coke
 Maintainer: Brandon Coke <bc6g20@soton.ac.uk>
-Description: Command-line interface for automated analysis of a number of GEO and ArrayExpress datasets for large scale metanalyses.
+Description: Command-line interface for automated clustering of GEO and ArrayExpress datasets for large scale metanalyses.
 License: GPL3
 Encoding: UTF-8
 LazyData: true
