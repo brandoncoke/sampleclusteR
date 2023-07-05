@@ -1,6 +1,6 @@
 #meta_data_frame=  get.combined.table(obtain.gset("GSE35351", platform= "none"),T); columns_to_cluster= NULL
 cluster.metadata.frame= function(meta_data_frame, columns_to_cluster= NULL,
-                                 consise= T){
+                                 concise= T){
   if(is.null(columns_to_cluster) | class(columns_to_cluster) != "integer"){
     columns_to_cluster= 1:ncol(meta_data_frame)
     message("No columns specified for clustering- clustering by all columns")
@@ -56,7 +56,7 @@ cluster.metadata.frame= function(meta_data_frame, columns_to_cluster= NULL,
   exp_design_frame= get.clusters.as.frame(column_clusters)
   cluster_names= get.cluster.titles(exp_design_frame)
   meta_data_frame$group_name= cluster_names[clusters]
-  if(consise){
+  if(concise){
     return(
       data.frame(
         "sample"= paste0("Sample_", 1:nrow(meta_data_frame)),
