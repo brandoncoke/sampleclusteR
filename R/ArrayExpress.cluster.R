@@ -1,37 +1,25 @@
 #automate the clustering of ArrayExpress data
 ArrayExpress.cluster= function(
     sdrf_loc= "https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/935/E-MTAB-11935/Files/E-MTAB-11935.sdrf.txt",
-    broad_cluster_thres= 0.65,
     concise= T){
   metadata= read.table(sdrf_loc, sep= "\t", header = T)
   metadata[is.na(metadata)]= ""
   sample_source= metadata$Source.Name
   metadata= metadata[!grepl("id|file|accession|source[.]Name|scan[.]|comment[.]", colnames(metadata),
                                     ignore.case= T)]
-
-
-  #a way to avoid making too many clusters
-  if(!is.na(broad_cluster_thres) | !is.null(broad_cluster_thres) |
-     broad_cluster_thres < 1){
-    cols_all_unique= apply(metadata, 2, function(x){
-      round(length(x)*broad_cluster_thres) > length(unique(x)) &
-        length(unique(x)) != 1
-    })
-    cols_all_unique= !grepl("protocol", names(metadata), ignore.case= T) & cols_all_unique
-    if(sum(cols_all_unique) == 0){
-      cols_all_unique= apply(metadata, 2, function(x){
-        length(unique(x)) != 1
-      })
-    }
-
-
-  }else{
-    cols_all_unique= apply(metadata, 2, function(x){
-      length(unique(x)) != 1
-    })
-  }
+  #cols_all_unique= apply(metadata, 2, function(x){
+  #  round(length(x)*broad_cluster_thres) > length(unique(x)) &
+  #    length(unique(x)) != 1
+  cols_all_unique= apply(metadata, 2, function(x){
+    length(unique(x)) != 1
+  })
 
   cluster_frame= metadata[,cols_all_unique]
+  nonredundant_col_indices= as.list(apply(cluster_frame, 1, function(x){which(!duplicated(x))}))
+  nonredundant_col_indices= unique(unlist(nonredundant_col_indices))
+  cluster_frame= cluster_frame[, nonredundant_col_indices]
+
+
   #drop columns with sample ids or file ids to make automated clusters more
   #readable
   cols_to_keep= colnames(cluster_frame)
@@ -48,6 +36,12 @@ ArrayExpress.cluster= function(
                      "_",
                      append_col,
                      ignore.case = T)
+    #upper case first letter
+    append_col=
+      paste0(toupper(substr(append_col,1,1)),
+             substr(append_col,2,nchar(append_col)))
+    append_col= gsub("^_", "", append_col)
+
     cluster_frame[,i]= gsub(" ", "_", paste0(append_col, cluster_frame[,i],
                               sep= "_"))
   }
