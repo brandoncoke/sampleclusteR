@@ -40,7 +40,8 @@ ArrayExpress.cluster= function(
     append_col=
       paste0(toupper(substr(append_col,1,1)),
              substr(append_col,2,nchar(append_col)))
-    append_col= gsub("^_", "", append_col)
+    append_col= gsub("^_|_$", "", append_col)
+    append_col= paste0(append_col, ":_")
 
     cluster_frame[,i]= gsub(" ", "_", paste0(append_col, cluster_frame[,i],
                               sep= "_"))
