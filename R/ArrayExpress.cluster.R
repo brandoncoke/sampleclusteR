@@ -1,21 +1,29 @@
 #automate the clustering of ArrayExpress data
 ArrayExpress.cluster= function(
     sdrf_loc= "https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/935/E-MTAB-11935/Files/E-MTAB-11935.sdrf.txt",
-    broad_cluster= T,
+    broad_cluster_thres= 0.65,
     concise= T){
   metadata= read.table(sdrf_loc, sep= "\t", header = T)
   metadata[is.na(metadata)]= ""
   sample_source= metadata$Source.Name
-  metadata= metadata[!grepl("id|file|accession|source[.]Name", colnames(metadata),
+  metadata= metadata[!grepl("id|file|accession|source[.]Name|scan[.]|comment[.]", colnames(metadata),
                                     ignore.case= T)]
 
 
   #a way to avoid making too many clusters
-  if(broad_cluster){
+  if(!is.na(broad_cluster_thres) | !is.null(broad_cluster_thres) |
+     broad_cluster_thres < 1){
     cols_all_unique= apply(metadata, 2, function(x){
-      round(length(x)*0.6) > length(unique(x)) &
+      round(length(x)*broad_cluster_thres) > length(unique(x)) &
         length(unique(x)) != 1
     })
+    cols_all_unique= !grepl("protocol", names(metadata), ignore.case= T) & cols_all_unique
+    if(sum(cols_all_unique) == 0){
+      cols_all_unique= apply(metadata, 2, function(x){
+        length(unique(x)) != 1
+      })
+    }
+
 
   }else{
     cols_all_unique= apply(metadata, 2, function(x){
