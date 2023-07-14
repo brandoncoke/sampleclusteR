@@ -2,7 +2,7 @@
 ArrayExpress.cluster= function(
     sdrf_loc= "https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/935/E-MTAB-11935/Files/E-MTAB-11935.sdrf.txt",
     concise= T){
-  metadata= read.table(sdrf_loc, sep= "\t", header = T)
+  metadata= read.delim(sdrf_loc, sep= "\t", header = T)
   metadata[is.na(metadata)]= ""
   sample_source= metadata$Source.Name
   metadata= metadata[!grepl("id|file|accession|source[.]Name|scan[.]|comment[.]", colnames(metadata),
@@ -18,8 +18,6 @@ ArrayExpress.cluster= function(
   nonredundant_col_indices= as.list(apply(cluster_frame, 1, function(x){which(!duplicated(x))}))
   nonredundant_col_indices= unique(unlist(nonredundant_col_indices))
   cluster_frame= cluster_frame[, nonredundant_col_indices]
-
-
   #drop columns with sample ids or file ids to make automated clusters more
   #readable
   cols_to_keep= colnames(cluster_frame)

@@ -1,0 +1,178 @@
+#benchmark automated clustering of ArrayExpress data
+################################################################################
+#Package install
+################################################################################
+if (!requireNamespace("stringr", quietly = TRUE))
+  install.packages("stringr")
+require(stringr)
+
+################################################################################
+#Functions
+################################################################################
+#page1=jsonlite::fromJSON(readLines("https://www.ebi.ac.uk/biostudies/api/v1/ArrayExpress/search?pageSize=100")
+#page2=jsonlite::fromJSON(readLines("https://www.ebi.ac.uk/biostudies/api/v1/ArrayExpress/search?page=2"))
+#metadata=jsonlite::fromJSON(readLines("https://www.ebi.ac.uk/biostudies/api/v1/studies/E-MEXP-31"))
+#metadata=jsonlite::fromJSON(readLines("https://www.ebi.ac.uk/biostudies/api/v1/files/A-AFFY-33"))
+#readLines("https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/156/E-MTAB-13158/Files/")
+get_file_links= function(line= html_page[12]){
+  if(grepl("a href", line)){
+    number= substr(line, str_locate(line, "a href")[1],
+                   str_locate(line, "a href")[1]+ 12)
+    return(gsub("a href=\\\"|/\\\"", "", number))
+  }else{
+    return(NA)
+  }
+}
+get_link= function(x){
+  if(grepl("a href", x)){
+    y= substr(x, str_locate(x, "a href")[1],
+              str_locate(x, "a href")[1]+ 50)
+    y= gsub("a href=\\\"", "", y)
+    substr(y, 1,
+           str_locate(y, "\">")[1]-2)
+  }else{
+    return(NA)
+  }
+
+}
+check_sdrfs= function(link= "https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/975/E-MTAB-12975/Files/"){
+  tryCatch(
+    #try to do this
+    {
+      any(grepl("sdrf", readLines(link)))
+    },
+    #if an error occurs, tell me the error
+    error=function(e) {
+      message('An Error Occurred')
+      print(e)
+    },
+    #if a warning occurs, tell me the warning
+    warning=function(w) {
+      message('A Warning Occurred')
+      return(F)
+    }
+  )
+}
+
+grab_sdrfs= function(study= "975",
+                     url_base= url_start){
+  html= readLines(paste0(url_base, study))
+  html= html[as.logical(lapply(html, grepl, pattern= "a href="))
+             & !as.logical(lapply(html, grepl, pattern= "Parent Directory")) &
+               !as.logical(lapply(html, grepl, pattern= "?C=S;O=A"))
+  ]
+  html[!is.na(html) | !is.null(html)]
+  if(length(html) > 0){
+    file_sub_dirs= unlist(lapply(html, get_link))
+    links= paste0(url_base, study, "/", file_sub_dirs, "/Files")
+    bool= unlist(lapply(links, check_sdrfs)) #does the metadataframe exist?
+    return(
+      data.frame(
+        table_link= paste0(url_base, study, "/",
+                           file_sub_dirs[bool],
+                           "/Files/",
+                           file_sub_dirs[bool],
+                           ".sdrf.txt"),
+        good= T
+      )
+    )
+  }else{
+    data.frame(
+      table_link= NA,
+      good= F
+    )
+  }
+
+
+}
+
+cluster_frame_gen= function(link= "https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/179/E-MTAB-10179/Files/E-MTAB-10179.sdrf.txt"){
+  metadata= read.table(link, sep= "\t", header = T)
+  automated_cluster= ArrayExpress.cluster(link)
+  automated_cluster[,-1]
+}
+
+################################################################################
+#start
+################################################################################
+platforms_page= "https://ftp.ebi.ac.uk/biostudies/fire/"
+platforms_page= as.character(readLines(platforms_page))
+platforms= unlist(lapply(platforms_page, get_link))
+platforms=
+  platforms[!is.na(platforms) & platforms != "?C=N;O=" & platforms != "test"
+            & platforms != "/biostudies"]
+metadata_table_links
+for(i in platforms){
+  url_start= paste0("https://ftp.ebi.ac.uk/biostudies/fire/",
+                   i,
+                   "/")
+  html_page= readLines(url_start)
+  file_locs= as.character(lapply(html_page, get_file_links))
+  file_locs= file_locs[file_locs != "NA" & nchar(file_locs) < 4]
+  temp= do.call(rbind,
+                                lapply(file_locs, grab_sdrfs, url_base= url_start))
+  temp$plat= i
+  metadata_table_links= rbind(temp, metadata_table_links)
+  head(metadata_table_links)
+}
+write.csv(metadata_table_links, "~/metadata_table_links.csv", row.names= F,
+          quote= F)
+
+################################################################################
+#create benchmark frame for manual curation...
+################################################################################
+metadata_table_links= read.csv("~/csv/metadata_table_links.csv")
+platforms= names(head(sort(table(metadata_table_links$plat), decreasing = T)))
+set.seed(0451)
+get_link_sample= function(platform= "E-GEOD-"){
+  sample(metadata_table_links$table_link[metadata_table_links$plat == platform], 50)
+}
+study_links= do.call(c, lapply(platforms, get_link_sample))
+
+
+
+require(sampleclusteR)
+#benchmark_frame= do.call(rbind, lapply(study_links, ArrayExpress.cluster))
+benchmark_frame= ArrayExpress.cluster(study_links[1])
+study_id= substr(
+  study_links[i],
+  stringr::str_locate(study_links[1], "Files/")[1],
+  nchar(study_links[i])
+)
+study_id= gsub("Files/|[.]sdrf|[.]txt", "",
+               study_id)
+benchmark_frame$study_id= study_id
+
+
+for(i in 2:length(study_links)){
+  temp= ArrayExpress.cluster(study_links[i])
+  study_id= substr(
+    study_links[i],
+    stringr::str_locate(study_links[i], "Files/")[1],
+    nchar(study_links[i])
+  )
+  study_id= gsub("Files/|[.]sdrf|[.]txt", "",
+                 study_id)
+  temp$study_id= study_id
+
+
+  if(nrow(temp) <= 25){
+    benchmark_frame= rbind(benchmark_frame, temp)
+  }
+  i=i+1
+}
+write.csv(benchmark_frame, "~/ArrayExpress_benchmark_frame.csv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+readLines()
