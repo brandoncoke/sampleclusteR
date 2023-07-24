@@ -1,3 +1,4 @@
+#outputs experiment sets- 0= ctrl 1= treated
 set.exp.groups= function(groups){
   combinations= get.group.combs(groups)
   lapply(combinations,function(X){

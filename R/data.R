@@ -1,7 +1,6 @@
-#' World Health Organization TB data
+#' Wnt downstream target frame
 #'
-#' A subset of data from the World Health Organization Global Tuberculosis
-#' Report ...
+#' Wnt downstream targets from Nusse et al.
 #'
 #' @format ## `wnt_responsive_genes`
 #' A data frame with 85 rows and 5 columns:

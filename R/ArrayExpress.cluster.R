@@ -2,19 +2,24 @@
 ArrayExpress.cluster= function(
     sdrf_loc= "https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/935/E-MTAB-11935/Files/E-MTAB-11935.sdrf.txt",
     concise= T){
+  #import sdrf metadata frame
   metadata= read.delim(sdrf_loc, sep= "\t", header = T)
   metadata[is.na(metadata)]= ""
+  #get the sample names
   sample_source= metadata$Source.Name
+  #remove uneccessary columns
   metadata= metadata[!grepl("id|file|accession|source[.]Name|scan[.]|comment[.]", colnames(metadata),
                                     ignore.case= T)]
   #cols_all_unique= apply(metadata, 2, function(x){
   #  round(length(x)*broad_cluster_thres) > length(unique(x)) &
   #    length(unique(x)) != 1
+  #cut down on redundancy- select columns where the are multiple values
   cols_all_unique= apply(metadata, 2, function(x){
     length(unique(x)) != 1
   })
 
   cluster_frame= metadata[,cols_all_unique]
+  #then remove columns where the same value is provided for a given row
   nonredundant_col_indices= as.list(apply(cluster_frame, 1, function(x){which(!duplicated(x))}))
   nonredundant_col_indices= unique(unlist(nonredundant_col_indices))
   cluster_frame= cluster_frame[, nonredundant_col_indices]
@@ -23,7 +28,7 @@ ArrayExpress.cluster= function(
   cols_to_keep= colnames(cluster_frame)
 
   cluster_frame= metadata[,cols_to_keep]
-  #append column name to make sense of values
+  #append column name i.e. append original column name from sdrf metadata table
   for(i in 1:ncol(cluster_frame)){
     append_col= colnames(cluster_frame)[i]
     append_col= gsub("characteristics.|factor.value",

@@ -5,7 +5,7 @@
 obtain.metadata(GEOset)
 }
 \description{
-Converts cluster frames into experiment sets used when analysing comparing the sample clusters to one another.}
+Converts cluster frames into experiment sets used when analysing comparing the sample clusters to one another. 0 is control and 1 is treated X is excluded from the pairwise comparison.}
 \examples{
 gset= obtain.gset("GSE84881")
 gsm_titles= obtain.gsm.titles(gset)
