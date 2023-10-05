@@ -28,7 +28,7 @@ manual.experiment_sets= function(sample_names,
         which(as.logical(lapply(new_label[,1],grep, cluster_name[2]))) #bodge- implement check for all words i.e. !is.na(labels_of_a_cluster)
       group_names= c(group_names,paste0(new_label[index_of_shared,1],collapse= "_")) #return shared words
     }else{
-      group_names= c(group_names,labels_of_a_cluster[1])}
+      group_names= c(group_names,cluster_name[1])}
   }
 
   experiment_sets= unlist(experiment_sets)
