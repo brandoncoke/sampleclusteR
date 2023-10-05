@@ -1,29 +1,38 @@
-#meta_data_frame=  get.combined.table(obtain.gset("GSE35351", platform= "none"),T); columns_to_cluster= NULL
+#meta_data_frame=  get.combined.table(obtain.gset("GSE60052", platform= "none"),T); columns_to_cluster= 3
 cluster.metadata.frame= function(meta_data_frame, columns_to_cluster= NULL,
                                  concise= T){
-  if(is.null(columns_to_cluster) | class(columns_to_cluster) != "integer"){
+
+  if(!any(columns_to_cluster %in% 1:nrow(meta_data_frame))){
+    message("No columns specified for clustering- clustering by all columns- provide a numeric list with columns_to_cluster")
     columns_to_cluster= 1:ncol(meta_data_frame)
-    message("No columns specified for clustering- clustering by all columns")
-  }
-    columns_to_cluster= columns_to_cluster[columns_to_cluster %in%  1:ncol(meta_data_frame)]
-  appended_names= paste0(colnames(meta_data_frame[, columns_to_cluster]),
-                         "_group")
-  columns_to_cluster_unique= apply(meta_data_frame, 2, function(x){
-    length(unique(x)) != 1
-  })
-  if(sum(columns_to_cluster_unique) == 0){
-    stop("All samples unique cannot cluster- need a another column")
-  }
-  columns_to_cluster= as.numeric(which(columns_to_cluster_unique))
-  if(length(columns_to_cluster) > 1){
-    sample_labels= apply(meta_data_frame[, columns_to_cluster_unique], 1,
-                         paste, collapse = "_")
+    columns_to_cluster_unique= apply(meta_data_frame, 2, function(x){
+      length(unique(x)) != 1
+    })
+    if(sum(columns_to_cluster_unique) == 0){
+      stop("All samples unique cannot cluster- need a another column")
+    }
+    columns_to_cluster= as.numeric(which(columns_to_cluster_unique))
+    if(length(columns_to_cluster) > 1){
+      sample_labels= apply(meta_data_frame[, columns_to_cluster_unique], 1,
+                           paste, collapse = "_")
+    }else{
+      sample_labels= meta_data_frame[, columns_to_cluster_unique]
+    }
+    if(length(sample_labels) != length(unique(sample_labels))){
+      sample_labels= paste0(sample_labels, "_sample_", 1:length(sample_labels))
+    }
   }else{
-    sample_labels= meta_data_frame[, columns_to_cluster_unique]
-  }
-  if(length(sample_labels) != length(unique(sample_labels))){
+    if(length(columns_to_cluster)> 2){
+      sample_labels=
+        as.character(apply(meta_data_frame[, columns_to_cluster], 1, paste0, collapse = "_"))
+    }else{
+      sample_labels= meta_data_frame[, columns_to_cluster]
+    }
     sample_labels= paste0(sample_labels, "_sample_", 1:length(sample_labels))
   }
+
+
+
 
 
   column_clusters= title.clustering(

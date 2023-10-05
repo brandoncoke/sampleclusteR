@@ -5,6 +5,9 @@ get.cluster.titles= function(exp_design_frame){# bodge pls fix.
   #remove unecessary junk in titles- makes end file names more readable
   for(i in 1:ncol(exp_design_frame)){
     labels_of_a_cluster= exp_design_frame[,i]
+    labels_of_a_cluster= gsub(" ", "_", labels_of_a_cluster, ignore.case = T)
+    labels_of_a_cluster= gsub("  ", "_", labels_of_a_cluster, ignore.case = T)
+    labels_of_a_cluster= gsub("__", "_", labels_of_a_cluster, ignore.case = T)
     labels_of_a_cluster= gsub("-scr[0-9][0-9]$", "_scramble", labels_of_a_cluster, ignore.case = T)
     labels_of_a_cluster= gsub("-scr[0-9]$", "_scramble", labels_of_a_cluster, ignore.case = T)
     labels_of_a_cluster= gsub("-shrna[0-9]$", "_shRNA", labels_of_a_cluster, ignore.case = T)

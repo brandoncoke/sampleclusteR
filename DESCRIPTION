@@ -9,6 +9,6 @@ License: GPL3
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.6.0), rockchalk, cluster, stats, methods, Biobase, BiocManager, limma, GEOquery
-Imports: rockchalk, cluster, limma, GEOquery
+Imports: rockchalk, cluster, limma, GEOquery, BiocManager
 Suggests: Rmpfr, gmp, RankProd
 Config/testthat/edition: 3

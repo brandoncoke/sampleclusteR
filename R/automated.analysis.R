@@ -1,4 +1,5 @@
-#GEO_id="GSE57728"; path="~/"; meta_data_and_combined=F; platform= "NONE"; limma_or_rankprod= "limma"; words_only= F
+#GEO_id="GSE87517"; path="~/"; meta_data_and_combined=F; platform= "GPL16791"; limma_or_rankprod= "limma"; words_only= F
+#GEO_id="GSE79695";  path="~/"; platform= "GPL570"; selection= 1; words_only= T #debugging
 automated.analysis= function(GEO_id,  path="~/",
                              meta_data_and_combined=F,
                              platform= "NONE",
@@ -129,6 +130,7 @@ automated.analysis= function(GEO_id,  path="~/",
 
   #automated.analysis means no human interference- setting up pairwise comparisons automatically.
   gsm_template= rep("X", nrow(combined_table))
+  #check if at least 1 control and treated identified
   check= any(label_score == 0) &
     any(label_score == 2 | label_score == 1)
 
@@ -183,16 +185,12 @@ automated.analysis= function(GEO_id,  path="~/",
   if(length(experiment_sets) == 0){
     stop("No groups idenfied- use manual.analysis")
   }
-
-
-  #below gets rid of invalid experiment sets where only one replicate (n <= 1) in either comparison. limma cant deal with that.
-  experiment_sets= experiment_sets[as.logical(lapply(experiment_sets,
-                                                     experiment.set.check))]
   message("The comparisons are as follows") # have to put it here as switch messages the titles
   output_titles= get.experiment.designs.manual(groups_identified= comb_groups,
                                                assoc_cluster= comb_clusters, experiment_sets)
+  #linux issue saving files with larfe names- cut them down
   check_output_file_length= as.logical(lapply(output_titles, function(x){
-    nchar(x) > 40
+    nchar(x) > 70
   }))
   if(any(check_output_file_length)){
     for(i in which(check_output_file_length)){

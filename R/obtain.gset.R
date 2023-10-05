@@ -1,9 +1,3 @@
-if("BiocManager" %in% rownames(installed.packages()) == FALSE){
-  install.packages("BiocManager")}
-require("BiocManager")
-if("GEOquery" %in% rownames(installed.packages()) == FALSE){
-  BiocManager::install("GEOquery")}
-require("GEOquery")
 obtain.gset= function(GSE_code, platform= "NONE"){ #user enters GSE code
   gset <- getGEO(GSE_code, GSEMatrix =T, AnnotGPL=T)
   if(length(gset) > 1 & any(grepl(platform, attr(gset, "names")))){

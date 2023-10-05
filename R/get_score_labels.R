@@ -1,7 +1,7 @@
 get_score_labels= function(sample_names){
   up_reg_labels = c("overexp", "express", "transgen", "expos", "tg", "induc",
                     "stim", "treated", "transfected", "overexpression",
-                    "transformed"
+                    "transformed", "tumor", "tomour"
   )
   down_reg_labels <- c("knock", "null",
                        "s[hi]rna",
@@ -17,6 +17,7 @@ get_score_labels= function(sample_names){
                        "defici",
                        "[_| ]ko[_| ]|[_| ]ko$")
   control_labels <- c("untreat", "_ns_",
+                      "normal",
                       "gfp",
                       "vehicle",
                       "sensitive",
