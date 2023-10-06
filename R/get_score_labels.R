@@ -1,7 +1,8 @@
 get_score_labels= function(sample_names){
   up_reg_labels = c("overexp", "express", "transgen", "expos", "tg", "induc",
                     "stim", "treated", "transfected", "overexpression",
-                    "transformed", "tumor", "tomour"
+                    "transformed", "tumor", "tomour", "disease",
+                    "infect", "disorder"
   )
   down_reg_labels <- c("knock", "null",
                        "s[hi]rna",
@@ -17,8 +18,8 @@ get_score_labels= function(sample_names){
                        "defici",
                        "[_| ]ko[_| ]|[_| ]ko$")
   control_labels <- c("untreat", "_ns_",
-                      "^wt[_| ]|[_| ]wt[_| ]",
                       "normal",
+                      "^wt$|^wt[_| ]|[_| ]wt[_| ]|[_| ]wt$",
                       "gfp",
                       "vehicle",
                       "sensitive",
@@ -34,10 +35,12 @@ get_score_labels= function(sample_names){
                       "nontreat",
                       "non.treated",
                       "control",
-                      "ctrl",
+                      "[ |_]con[ |_]|^con$|^con[_| ]|[_| ]con$", #con sometimes stand in for control- needs to be specific- no futher words before or after
                       "untreated",
                       "no.treat",
                       "undosed",
+                      "reference",
+                      "standard",
                       "untransfected",
                       "mir.nc",
                       "minc",

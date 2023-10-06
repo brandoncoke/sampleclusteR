@@ -62,6 +62,11 @@ get.cluster.titles= function(exp_design_frame){# bodge pls fix.
   labels= gsub("  ", "_",labels) #cleanup of whitepace
   labels= gsub(" ", "_",labels) #cleanup of whitepace
   labels= gsub("__|___|____", "_",labels) #cleanup of whitepace
+  labels= gsub("___$", "",labels) #cleanup of whitepace
+  labels= gsub("__$", "",labels) #cleanup of whitepace
   labels= gsub("_$", "",labels) #cleanup of whitepace
+  labels= gsub("^___", "",labels) #cleanup of whitepace
+  labels= gsub("^__", "",labels) #cleanup of whitepace
+  labels= gsub("^_", "",labels) #cleanup of whitepace
   return(labels)
 }
