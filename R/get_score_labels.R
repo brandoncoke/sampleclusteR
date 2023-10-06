@@ -17,6 +17,7 @@ get_score_labels= function(sample_names){
                        "defici",
                        "[_| ]ko[_| ]|[_| ]ko$")
   control_labels <- c("untreat", "_ns_",
+                      "^wt[_| ]|[_| ]wt[_| ]",
                       "normal",
                       "gfp",
                       "vehicle",
