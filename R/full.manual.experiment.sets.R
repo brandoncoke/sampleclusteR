@@ -4,7 +4,7 @@
 #                                      columns_to_cluster = 3)
 #sample_names= cluster_frame$clustered_name
 #comb_groups= cluster_frame$group
-manual.experiment_sets= function(sample_names,
+full.manual.experiment.sets= function(sample_names,
                                  comb_groups){
   experiment_sets= set.exp.groups(comb_groups)
   experiment_sets= experiment_sets[as.logical(lapply(experiment_sets,
