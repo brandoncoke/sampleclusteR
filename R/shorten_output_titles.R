@@ -1,16 +1,29 @@
+#output_title= output_titles[1]
 shorten_output_titles= function(output_title){
-  #output_title= as.character(unlist(output_title))
-  #output_title= tolower(output_title)
-  output_title= gsub("_VS_", "_vs_", output_title)
-  output_title= unlist(strsplit(output_title, "_vs_"))
-  ori_titles= output_title
-  first_parts_of_strings= substr(output_title, 1, 49)
-  i=49
-  #keep gsubbing until unique strings identified
-  while(first_parts_of_strings[1] == first_parts_of_strings[2]
-        & i <= max(nchar(ori_titles))){
-    first_parts_of_strings= substr(output_title, 1, i)
-    i=i+1
+  output_title= gsub("_VS_", "_vs_", output_title) #if VS upper case- strsplt lacks ignore.case
+  output_title_split= unlist(strsplit(output_title, "_vs_"))
+  control_words= unlist(strsplit(output_title_split[1], "_"))
+  treated_words= unlist(strsplit(output_title_split[2], "_"))
+
+  i= 1
+  i_max= max(c(
+    nchar(control_words),
+    nchar(treated_words)
+  ))
+  i= 1
+  new_output_title= ""
+  while(nchar(new_output_title) < 100 & i < i_max){
+    new_control_title= control_words[1:i]
+    new_control_title= new_control_title[!is.na(new_control_title)]
+    new_treated_title= treated_words[1:i]
+    new_treated_title= new_treated_title[!is.na(new_control_title)]
+    new_output_title= paste0(
+      paste0(new_control_title, collapse= "_"),
+      "_vs_",
+      paste0(new_treated_title, collapse= "_")
+      , collapse= "_")
+    i= i+1
   }
-  return(paste0(first_parts_of_strings, collapse = "_vs_"))
+
+  return(new_output_title)
 }

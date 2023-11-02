@@ -13,14 +13,22 @@ get.experiment.designs.manual= function(groups_identified,assoc_cluster,experime
     assigned_groups= unlist(strsplit(x,""))
     indice_of_control= groups_identified[which(assigned_groups == "0")[1]]
     indice_of_treated= groups_identified[which(assigned_groups == "1")[1]]
+    control_sample_name= cluster_names[indice_of_control]
+    treated_sample_name= cluster_names[indice_of_treated]
+    #avoids issue with shorten_output_titles as strsplit relies on _vs_ to get
+    #control and treated sample names
+    control_sample_name= gsub("_vs_", "_verus", control_sample_name,
+                              ignore.case = T)
+    treated_sample_name= gsub("_vs_", "_verus", treated_sample_name,
+                              ignore.case = T)
 
-    paste0(cluster_names[indice_of_control], #bodge but gets the groups aligned correctly
+    paste0(control_sample_name, #bodge but gets the groups aligned correctly
            "_vs_",
-           cluster_names[indice_of_treated])
+           treated_sample_name)
 
 
   }))
-
+  #this will cause issues when saving- assumes it is a directory
   output= gsub("/mg","_per_mg",output) #Deals with slashes in titles- prevents csv saving
   output= gsub("/ug","_per_ug",output) #cant regex [ug|mg]- cuts off unit i.e. returns _per_g
   output= gsub("/ul","_per_ul",output)
@@ -35,11 +43,18 @@ get.experiment.designs.manual= function(groups_identified,assoc_cluster,experime
   output= gsub("sample.[0-9][0-9]|sample.[0-9]|sample[0-9]", "samples",output, ignore.case = T)
   output= gsub("patient.[0-9][0-9]|patient.[0-9]|patient[0-9]", "output",output, ignore.case = T) #can you spot why the second is redundant. eh...
   output= gsub("replica.[0-9]|replica[0-9]", "", output, ignore.case = T)
-  output= gsub("patient[0-9][0-9][0-9]", "patient_", output, ignore.case = T)
-  output= gsub("patient[0-9][0-9]", "patient_", output, ignore.case = T)
-  output= gsub("patient[0-9]", "patient_", output, ignore.case = T)
+  output= gsub("patient[0-9a-z][0-9a-z][0-9a-z]", "patient", output, ignore.case = T)
+  output= gsub("patient[0-9a-z][0-9a-z]", "patient", output, ignore.case = T)
+  output= gsub("patient[0-9a-z]", "patient", output, ignore.case = T)
   output= gsub("replica.[a-z]|replica[a-z]", "", output, ignore.case = T)
   output= gsub("duplicate", "", output, ignore.case = T)
+  output= gsub("repeat", "", output, ignore.case= T)
+  #usually shorthand for replicate numbers
+  output= gsub("[ |_][0-9a-zA-Z][0-9a-zA-Z][0-9a-zA-Z][0-9a-zA-Z]$", "", output)
+  output= gsub("[ |_][0-9a-zA-Z][0-9a-zA-Z][0-9a-zA-Z]$", "", output)
+  output= gsub("[ |_][0-9a-zA-Z][0-9a-zA-Z]$", "", output)
+  output= gsub("[ |_][0-9a-zA-Z]$", "", output)
+
   output= gsub("h_[0-9]$|h_[0-9][0-9]$|hr[0-9]$|hr.[0-9]", "hr", output, ignore.case = T)
   output= gsub("biological", "", output, ignore.case = T) #usually pointless info about being biological replicate
   #output= gsub("___", "_", output, ignore.case = T)
@@ -53,8 +68,11 @@ get.experiment.designs.manual= function(groups_identified,assoc_cluster,experime
       output[i]= gsub("^_", "", output[i], ignore.case = T)
     }
   }
+  output= gsub("[/][\\]", "", output)
   if(words_only){
     output= gsub("[0-9]", "", output, ignore.case = T)
   }
+
+  output= gsub("^[_| ]", "", output)
   return(output)
 }

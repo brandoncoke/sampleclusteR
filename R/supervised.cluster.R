@@ -87,7 +87,7 @@ supervised.analysis.cluster= function(GEO_id,  path="~/", platform= "NONE", word
                         get.experiment.designs.manual(groups,comb_clusters, experiment_sets),
                         {"This shouldn't happen"})
   check_output_file_length= as.logical(lapply(output_titles, function(x){
-    nchar(x) > 40
+    nchar(x) > 100
   }))
   if(any(check_output_file_length)){
     for(i in which(check_output_file_length)){

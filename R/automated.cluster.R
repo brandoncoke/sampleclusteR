@@ -81,6 +81,12 @@ automated.cluster= function(GEO_id,
                                           function(x){
                                             length(unique(x)) > 1
                                           })))
+  if(!any(as.logical(apply(combined_table[,1:3], 2,
+                           function(x){
+                             length(unique(x)) > 1
+                           })))){
+    stop("No unique samples identified based on metadata")
+  }
   #find matching groups- remove them
   switch(length(unique_features),
          unique_features= unique_features,
@@ -198,7 +204,7 @@ automated.cluster= function(GEO_id,
   message("The comparisons are as follows") # have to put it here as switch messages the titles
   output_titles= get.experiment.designs.manual(comb_groups,comb_clusters, experiment_sets)
   check_output_file_length= as.logical(lapply(output_titles, function(x){
-    nchar(x) > 40
+    nchar(x) > 100
   }))
   if(any(check_output_file_length)){
     for(i in which(check_output_file_length)){

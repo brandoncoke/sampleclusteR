@@ -1,4 +1,4 @@
-#GEO_id="GSE87517"; path="~/"; meta_data_and_combined=F; platform= "GPL16791"; limma_or_rankprod= "limma"; words_only= F
+#GEO_id="GSE6731"; path="~/"; meta_data_and_combined=F; platform= "NONE"; limma_or_rankprod= "limma"; words_only= F
 #GEO_id="GSE79695";  path="~/"; platform= "GPL570"; selection= 1; words_only= T #debugging
 automated.analysis= function(GEO_id,  path="~/",
                              meta_data_and_combined=F,
@@ -81,6 +81,15 @@ automated.analysis= function(GEO_id,  path="~/",
                                           function(x){
                                             length(unique(x)) > 1
                                           })))
+  if(!any(as.logical(apply(combined_table[,1:3], 2,
+                          function(x){
+                            length(unique(x)) > 1
+                          })))){
+    stop("No unique samples identified based on metadata")
+  }
+
+
+
   #if the same groups are identified across different features- no need to include them
   #when assigning sample group titles
   switch(length(unique_features),
@@ -188,9 +197,9 @@ automated.analysis= function(GEO_id,  path="~/",
   message("The comparisons are as follows") # have to put it here as switch messages the titles
   output_titles= get.experiment.designs.manual(groups_identified= comb_groups,
                                                assoc_cluster= comb_clusters, experiment_sets)
-  #linux issue saving files with larfe names- cut them down
+  #linux issue saving files with large names- cut them down
   check_output_file_length= as.logical(lapply(output_titles, function(x){
-    nchar(x) > 70
+    nchar(x) > 100
   }))
   if(any(check_output_file_length)){
     for(i in which(check_output_file_length)){

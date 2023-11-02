@@ -85,7 +85,7 @@ supervised.analysis= function(GEO_id,  path="~/", platform= "NONE", meta_data_an
 
   print(output_titles)
   check_output_file_length= as.logical(lapply(output_titles, function(x){
-    nchar(x) > 40
+    nchar(x) > 100
   }))
   if(any(check_output_file_length)){
     for(i in which(check_output_file_length)){
