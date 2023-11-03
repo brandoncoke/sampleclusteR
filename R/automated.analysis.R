@@ -1,4 +1,4 @@
-#GEO_id="GSE6731"; path="~/"; meta_data_and_combined=F; platform= "NONE"; limma_or_rankprod= "limma"; words_only= F
+#GEO_id="GSE108345"; path="~/"; meta_data_and_combined=F; platform= "NONE"; limma_or_rankprod= "limma"; words_only= F
 #GEO_id="GSE79695";  path="~/"; platform= "GPL570"; selection= 1; words_only= T #debugging
 automated.analysis= function(GEO_id,  path="~/",
                              meta_data_and_combined=F,
@@ -207,10 +207,18 @@ automated.analysis= function(GEO_id,  path="~/",
     }
   }
   print(output_titles)
-  lapply(1:length(experiment_sets), exporting.csvs,
-         experiment_sets= experiment_sets, GEOset= gset,
-         limma_or_rankprod= limma_or_rankprod, path= path,output_titles= output_titles,
-         GEO_id= GEO_id)
+  #lapply(1:length(experiment_sets), exporting.csvs,
+  #       experiment_sets= experiment_sets, GEOset= gset,
+  #       limma_or_rankprod= limma_or_rankprod, path= path,output_titles= output_titles,
+  #       GEO_id= GEO_id)
+  for(experiment_set_index in 1:length(experiment_sets)){
+    exporting.csvs(experiment_set_index= experiment_set_index,
+                   experiment_sets= experiment_sets, GEOset= gset,
+                   limma_or_rankprod= limma_or_rankprod, path= path,output_titles= output_titles,
+                   GEO_id= GEO_id)
+  }
+
+
 
   if(meta_data_and_combined){
     meta_frame= do.call(rbind, lapply(experiment_sets, count_ctrl_treated))

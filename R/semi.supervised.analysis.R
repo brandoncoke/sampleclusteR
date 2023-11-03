@@ -146,10 +146,12 @@ semi.supervised.analysis= function(GEO_id,  path="~/", platform= "NONE", meta_da
   }
 
   print(output_titles)
-  lapply(1:length(experiment_sets), exporting.csvs,
-         experiment_sets= experiment_sets, GEOset= gset,
-         limma_or_rankprod= limma_or_rankprod, path= path,output_titles= output_titles,
-         GEO_id= GEO_id)
+  for(experiment_set_index in 1:length(experiment_sets)){
+    exporting.csvs(experiment_set_index= experiment_set_index,
+                   experiment_sets= experiment_sets, GEOset= gset,
+                   limma_or_rankprod= limma_or_rankprod, path= path,output_titles= output_titles,
+                   GEO_id= GEO_id)
+  }
 
   if(meta_data_and_combined){
     meta_frame= do.call(rbind, lapply(experiment_sets, count_ctrl_treated))
