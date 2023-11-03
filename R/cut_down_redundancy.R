@@ -26,8 +26,12 @@ cut_down_redundancy= function(control_indices,
 
   ]
   treated_samples= gsub(paste0(repeated_words, collapse = "|"), "", treated_samples)
+  for(i in 1:length(treated_samples))
+  while(grepl("  |__|_ | ", treated_samples[i])){
+    treated_samples[i]= gsub("  |__|_ | ", "_", treated_samples[i])
+  }
   treated_samples= gsub("_$", "", treated_samples)
-  treated_samples= gsub("_$", "", treated_samples)
+
   def_groups= NA
   for(control_indice in control_indices){
     #print(control_indice)
