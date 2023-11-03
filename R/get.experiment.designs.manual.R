@@ -50,9 +50,9 @@ get.experiment.designs.manual= function(groups_identified,assoc_cluster,experime
   output= gsub("duplicate", "", output, ignore.case = T)
   output= gsub("repeat", "", output, ignore.case= T)
   #usually shorthand for replicate numbers
-  output= gsub("[ |_][0-9a-zA-Z][0-9a-zA-Z][0-9a-zA-Z][0-9a-zA-Z]$", "", output)
-  output= gsub("[ |_][0-9a-zA-Z][0-9a-zA-Z][0-9a-zA-Z]$", "", output)
-  output= gsub("[ |_][0-9a-zA-Z][0-9a-zA-Z]$", "", output)
+  output= gsub("[ |_][0-9][0-9][0-9][0-9]$", "", output)
+  output= gsub("[ |_][0-9][0-9][0-9]$", "", output)
+  output= gsub("[ |_][0-9][0-9]$", "", output)
   output= gsub("[ |_][0-9a-zA-Z]$", "", output)
 
   output= gsub("h_[0-9]$|h_[0-9][0-9]$|hr[0-9]$|hr.[0-9]", "hr", output, ignore.case = T)
