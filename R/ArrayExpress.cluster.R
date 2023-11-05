@@ -1,4 +1,5 @@
 #automate the clustering of ArrayExpress data
+sdrf_loc= "https://ftp.ebi.ac.uk/biostudies/fire/E-GEOD-/882/E-GEOD-60882/Files/E-GEOD-60882.sdrf.txt"
 ArrayExpress.cluster= function(
     sdrf_loc= "https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/935/E-MTAB-11935/Files/E-MTAB-11935.sdrf.txt",
     concise= T){
