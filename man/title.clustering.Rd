@@ -4,6 +4,11 @@
 \usage{
 title.clustering(gsm_titles)
 }
+
+\Arguments{
+\item{gsm_titles}{character- titles for samples}
+}
+
 \description{
 Creates list which clusters samples based on the sample titles names from a GEO dataset. Titles form a GEO data set can be obtained using the obtain.gsm.titles function.}
 \examples{

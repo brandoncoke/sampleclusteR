@@ -4,6 +4,9 @@
 \usage{
 obtain.charateristics(GEOset)
 }
+\Arguments{
+\item{GEOset}{GEO dataseries object- use obtain.gset}
+}
 \description{
 Obtain the characteristics features from a GEO dataset}
 

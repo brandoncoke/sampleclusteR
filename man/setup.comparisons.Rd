@@ -4,6 +4,13 @@
 \usage{
 setup.comparisons(exp_groups,GEOset)
 }
+
+
+\Arguments{
+\item{exp_groups}{Groups of samples- array of integers}
+\item{GEOset}{GEO dataset object- use obtain.gset to obtain one}
+}
+
 \description{
 Used in the automated analysis function. Requires GEO data set and experiment groups (created by set.exp.groups)}
 \examples{

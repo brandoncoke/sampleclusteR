@@ -4,6 +4,10 @@
 \usage{
 full.manual.experiment.sets(sample_names, comb_groups)
 }
+\Arguments{
+\item{sample_names}{character with sample names)}
+\item{comb_groups}{Character how they are organised 0 is control 1 is treated X is excluded and outputted as 00XX11}
+}
 \description{
 Depricated use  manual.exp.sets instead for more control. Outputs all possible experiment designs for a given dataset for limma or DEG seq. 0 is control 1 is treated X is excluded and outputted as 00XX11.
 }

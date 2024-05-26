@@ -4,6 +4,9 @@
 \usage{
 get.combined.table(gset)
 }
+\Arguments{
+\item{gset}{GEO dataset object- use obtain.gset to obtain one}
+}
 \description{
 Obtain study meta data from gset- GEO dataset- only requires a gset}
 \examples{

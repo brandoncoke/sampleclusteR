@@ -4,6 +4,14 @@
 \usage{
 exporting.csvs(experiment_set_index, experiment_sets= experiment_sets, GEOset= gset, limma_or_rankprod= "limma", path= path, output_titles= output_titles)
 }
+\Arguments{
+\item{experiment_set_index}{list of integers representing the index of experiment sets. experiment sets is the intersample comparisons with treated (labelled as 1)}
+\item{experiment_sets}{Sets of experiments defined using set.exp.groups}
+\item{GEOset}{GEO dataseries object}
+\item{limma_or_rankprod}{Whether to use limma or RankProd to produce the differentially expressed gene list- limma by default}
+\item{path}{character where the Differentially expressed genes (DEG) list is saved}
+}
+
 \description{
 A function which creates all of the csv intersample comparisons identified from the clustering. Takes serveral arguments defined in the example code.
 experiment_set_index is a 1 to X list of integers representing the index of experiment sets. experiment sets is the intersample comparisons with treated (labelled as 1)

@@ -4,6 +4,9 @@
 \usage{
 supervised.analysiscluster(GEO_id,  path="~/", platform= "NONE")
 }
+\Arguments{
+\item{a_table}{Cluster frame- with rownames that contain sample names}
+}
 \description{
 Like supervised.analysis but instead outputs the gsm experiment sets for limma or RankProd using the setup.comparisons or setup.comparisons.RP functions. Outputs the experiment design like XXX000111 with 0 representing a control sample and 1 representing a treated sample. X excluded from the comparison
 }

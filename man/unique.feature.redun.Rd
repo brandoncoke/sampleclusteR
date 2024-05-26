@@ -4,6 +4,11 @@
 \usage{
 unique.feature.redun(unique_features, combined_table)
 }
+\Arguments{
+\item{unique_features}{non-redundant column indices}
+\item{combined_table}{cluster frame with sample groups- use GEO.cluster or cluster.metadata.frame}
+}
+
 \description{
 Exclusively used in automated.analysis and only for GEO dataseries metadata tables. Ensures there are no redundant columns when automatically generating group names}
 \examples{

@@ -4,6 +4,13 @@
 \usage{
 semi.supervised.analysis(GEO_id,  path="~/", platform= "NONE", meta_data_and_combined= F, limma_or_rankprod= "limma",words_only= F)
 }
+
+\Arguments{
+\item{GEO_id}{a character GEO id used like GSE84881}
+\item{platform}{a character- the platform to be used as dataseries can have multiple platforms- none specified- uses the first one in the gset object}
+\item{limma_or_rankprod}{Whether to use limma or RankProd to produce the differentially expressed gene list- limma by default}
+\item{words_only}{exlude numbers in sample names from clustering}
+}
 \description{
 Designed for studies like GSE130402 and GSE108345 where there are multiple distinct experiments within the GEO dataset i.e. multiple control samples. Unlike semi.supervised.analysis- less control and automates control and treated identification.
 Requires a valid GSE id- can be obtained using GEOquery::getGEO(valid_platform_id). Provides the user more control when clustering samples- by first clustering samples by title, characteristics, or combined (by samples' titles, source and characteristics). The user is then prompted to select which method or exit out and perform manual clustering via manual.analysis. User can specify a path to save the meta data table along with the analysed expression data once a valid GSE id has been provided. Thereafter, the user can then select which pairwise comparisons to do.

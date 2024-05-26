@@ -9,6 +9,13 @@ cut_down_redundancy(control_indices,
                               gsm_template,
                               comb_groups)
 }
+\Arguments{
+\item{control_indices}{indices for control samples}
+\item{treated_indices}{indices for treated samples}
+\item{comb_tables_managable_table}{metadata that has been processed using comb_tables_managable_table}
+\item{gsm_template}{template for samples- 0 is control 1 is treated- formated like 0011- 2 controls 2 treated in this case}
+\item{comb_groups}{combined clusters identified across columns}
+}
 \description{
 Used in automated analysis to generate the experiment designs- 0 is control and 1 is treated. X is excluded
 }

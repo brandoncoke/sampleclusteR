@@ -4,6 +4,9 @@
 \usage{
 shorten_output_titles(title)
 }
+\Arguments{
+\item{title}{character array with title names}
+}
 \description{
 Shortens the output titles when producing csvs.
 }

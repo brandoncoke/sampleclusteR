@@ -1,6 +1,10 @@
 \name{obtain.gsm.titles}
 \alias{obtain.gsm.titles}
 \title{Get sample titles from a GEO dataset}
+\Arguments{
+\item{GEOset}{GEO dataseries object- use obtain.gset}
+}
+
 \usage{
 obtain.gsm.titles(GEOset)
 }

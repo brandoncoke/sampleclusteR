@@ -4,6 +4,10 @@
 \usage{
 gsm.comb.managable(title)
 }
+\Arguments{
+\item{title}{a character of title samples}
+}
+
 \description{
 Alternative to gsm.title.managable- without miRNA bodge}
 

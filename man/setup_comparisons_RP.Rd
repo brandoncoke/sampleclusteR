@@ -4,6 +4,11 @@
 \usage{
 setup_comparisons_RP(exp_groups,GEOset,rand_seed= 0451)
 }
+\Arguments{
+\item{exp_groups}{Groups of samples- array of integers}
+\item{GEOset}{GEO dataset object- use obtain.gset to obtain one}
+\item{rand_seed}{Seed used for RankProd}
+}
 \description{
 Used in the automated analysis function. Requires GEO data set and experiment groups (created by set.exp.groups) and a random seed (to ensure consistent values between runs). RankProd is described by Breitling <i> et al </i> 2004 (DOI: 10.1016/j.febslet.2004.07.055) and updated paper by Del Carratore <i>et al</i> 2017 (DOI: 10.1093/bioinformatics/btx292)}
 \examples{

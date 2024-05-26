@@ -2,8 +2,13 @@
 \alias{get.cluster.titles}
 \title{Obtaining the names of the samples within a cluster.}
 \usage{
-get.cluster.titles(cluster_frame)
+get.cluster.titles(gsm_titles)
 }
+\Arguments{
+\item{gsm_titles}{character- titles for samples}
+}
+
+
 \description{
 Function used in get.experiment.designs to obtain the names of the clusters}
 

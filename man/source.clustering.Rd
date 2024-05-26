@@ -4,6 +4,10 @@
 \usage{
 source.clustering(GEOset)
 }
+\Arguments{
+\item{GEOset}{geo dataserires object- use obtain.gset}
+
+}
 \description{
 Creates a cluster list from the sources names from a GEO dataset.}
 \examples{
