@@ -24,7 +24,7 @@ sampleclusteR current features are:
 Unlike GEOrcale the package does not use a SVM model to automate the selection of control and treated samples and requires user interaction to select the valid pairwise comparisons
  ## Installation and requirements
 In the R interpretter- sampleclusteR can be installed using the code below. To install the package it will require
-- R  (≥ 4.0)
+- R  (≥ 4.4.3)
 - devtools (≥ 2.3)
 - cluster (≥ 2.0)
 - rockchalk (≥ 1.8)
@@ -52,7 +52,7 @@ BiocManager::install("RankProd", quiet= T)
 ```
 If running into issues when installing RankProd, devtools or rockchalk on debian or Ubuntu based operating systems run the code below in the terminal assuming you CRAN packages are available in your [repositories](https://cran.r-project.org/)
 ```sh
-#Run in a linux terminal
+#Run in a shell terminal
 sudo apt update #first two not necessary
 sudo apt upgrade
 sudo apt-get --fix-broken install libarchive13 libjsoncpp25 libproc2-0 librhash0 libuv1 procps #dependencies for R packages
