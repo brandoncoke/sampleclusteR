@@ -22,8 +22,15 @@ sampleclusteR current features are:
 - Perform large scale meta analysis of GEO data by automating analysis of GEO datasets.
 - Analyse GEO data sets using \emph{limma} or RankProd
 Unlike GEOrcale the package does not use a SVM model to automate the selection of control and treated samples and requires user interaction to select the valid pairwise comparisons
- ## Installation
-In the R interpretter- sampleclusteR can be installed using the code below.
+ ## Installation and requirements
+In the R interpretter- sampleclusteR can be installed using the code below. To install the package it will require
+- R  (≥ 4.0)
+- devtools (≥ 2.3)
+- cluster (≥ 2.0)
+- rockchalk (≥ 1.8)
+- BiocManager (≥ 3.2)
+- limma (≥ 3.2)
+- GEOquery (≥ 3.2)
 ```R
 #In the R terminal- install these dependencies
 install.packages("devtools", quiet= T)
