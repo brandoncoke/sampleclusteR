@@ -23,7 +23,7 @@ sampleclusteR current features are:
 - Analyse GEO data sets using \emph{limma} or RankProd
 Unlike GEOrcale the package does not use a SVM model to automate the selection of control and treated samples and requires user interaction to select the valid pairwise comparisons
  ## Installation and requirements
-In the R interpretter- sampleclusteR can be installed using the code below. To install the package it will require
+sampleclusteR requires the following:
 - R  (≥ 4.4.3)
 - devtools (≥ 2.3)
 - cluster (≥ 2.0)
@@ -31,6 +31,7 @@ In the R interpretter- sampleclusteR can be installed using the code below. To i
 - BiocManager (≥ 3.2)
 - limma (≥ 3.2)
 - GEOquery (≥ 3.2)
+After installing R from CRAN (https://cran.r-project.org/) the dependencies and sampleclusteR can be installed using the R code bellow.
 ```R
 #In the R terminal- install these dependencies
 install.packages("devtools", quiet= T)
@@ -73,21 +74,10 @@ R -e 'install.packages("devtools", quietly=T)'
 R -e 'devtools::install_github("brandoncoke/sampleclusteR")'
 #Run in a linux terminal
 ```
-Alternatively, a binary package (.tar.gz) can be downloaded from here which can be used to install the package via the install.package function using the code below in R
-```R
-install.packages("devtools", quiet= T)
-install.packages("cluster", quiet= T)
-install.packages("BiocManager", quiet= T)
-install.packages("rockchalk", quiet= T)
-BiocManager::install("limma", quiet= T, force= T)
-BiocManager::install("GEOquery", quiet= T, force= T)
-#Use devtools to build package
-install.package(file.choose()) #select the archive for the package
-```
-Finally, a R docker image (rocker) can be used to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)) and you are able to download the docker image. The Dockerfile used to create the rocker image is located here if you wish to build your own docker container with ```sudo  docker build -o - . --tag sampleclusteR``` alongside the other files in a directory. The code below can be used to load the docker image and run the package once the image of the container has been downloaded
+Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory. Ensure your current directory is the Git repository. Once the docker image is built a tar directory (sampleclusteR_docker_image.tar.gz) will be created and be used to load the package and its dependencies using the code below in the linux terminal.
 ```sh
-curl '' > ~/sampleclusteR_docker_image.tar.gz
-docker load < ~/sampleclusteR_docker_image.tar.gz #may require super user access- if so append sudo or doas or sudo !! after encountering an error
+bash docker_containerisation/build_command.sh #this will create the sampleclusteR_docker_image.tar.gz image
+docker load < sampleclusteR_docker_image.tar.gz #may require super user access- if so append sudo or doas or sudo !! after encountering an error
 docker volume create sampleclusteR_data #to enable you to save the csvs
 docker run -ti -v /home/:sampleclusteR_data sampleclusteR R #then type require("sampleclusteR")
 #when saving csvs in ~ will be /var/lib/docker/volumes/sampleclusteR_data on the host machine
