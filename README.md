@@ -1,6 +1,6 @@
 # sampleclusteR- commandline interface for large scale GEO dataset metanalysis
 
-## A Quick and efficient way of clustering and analysing samples from GEO datasets
+## A Quick and efficient way of clustering and analysing samples using .sdrf metadata and GEO metdata
 
 sampleclusteR allows users to quickly analyse datasets from Gene Expression Omnibus (GEO) and ArrayExpress metadata sets (via Sample and Data Relationship Format tables (.sdrf)) using a command line interface.
 To cluster GEO dataseries and produce a table with samples and their clusters such as GSE84881 a user can use
@@ -74,7 +74,7 @@ R -e 'install.packages("devtools", quietly=T)'
 R -e 'devtools::install_github("brandoncoke/sampleclusteR")'
 #Run in a linux terminal
 ```
-Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory. Ensure your current directory is the Git repository. Once the docker image is built a tar directory (sampleclusteR_docker_image.tar.gz) will be created and be used to load the package and its dependencies using the code below in the linux terminal.
+Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory. Ensure your current directory is the Git repository. Once the docker image is built; a tar directory (sampleclusteR_docker_image.tar.gz) will be created and be used to load the package and its dependencies using the code below in the linux terminal.
 ```sh
 bash docker_containerisation/build_command.sh #this will create the sampleclusteR_docker_image.tar.gz image
 docker load < sampleclusteR_docker_image.tar.gz #may require super user access- if so append sudo or doas or sudo !! after encountering an error
