@@ -12,9 +12,8 @@ RUN R -e 'install.packages("xml2", quietly=T)'
 RUN R -e 'install.packages("BiocManager", quietly=T)'
 RUN apt-get install -y r-cran-devtools    
 RUN R -e 'BiocManager::install("RankProd", force=T)'
-RUN R -e 'BiocManager::install("GEOquery", force=T)'
+RUN apt-get install -y r-bioc-geoquery
 RUN R -e 'BiocManager::install("limma", force=T)'
-RUN apt-get install -y r-bioc-geoquery 
 RUN R -e 'devtools::install_github("brandoncoke/sampleclusteR")'
 #RUN addgroup -S $DOCKER_USER && adduser -S $DOCKER_USER -G $DOCKER_USER
 #RUN chown $DOCKER_USER -R /home/
