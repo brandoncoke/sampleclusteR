@@ -22,7 +22,7 @@ sampleclusteR current features are:
 - Perform large scale meta analysis of GEO data by automating analysis of GEO datasets.
 - Analyse GEO data sets using \emph{limma} or RankProd
 Unlike GEOrcale the package does not use a SVM model to automate the selection of control and treated samples and requires user interaction to select the valid pairwise comparisons
- ## Installation and requirements
+### Installation and requirements
 sampleclusteR requires the following:
 - R  (≥ 4.4.3)
 - cluster (≥ 2.0)
@@ -32,6 +32,7 @@ sampleclusteR requires the following:
 - GEOquery (≥ 3.2)
 - devtools (≥ 2.3)
 
+### Installing from R console
 After installing R from CRAN (https://cran.r-project.org/) the dependencies and sampleclusteR can be installed using the R code bellow.
 ```R
 #In the R terminal- install these dependencies
@@ -45,6 +46,7 @@ install.packages("devtools", quiet= T)
 #Use devtools to build package
 devtools::install_github("brandoncoke/sampleclusteR")
 ```
+### Using RankProd
 To be able to analyse with RankProd; it requires the installation of the [RankProd package](https://www.bioconductor.org/packages/release/bioc/html/RankProd.html) from Bioconductor. The code below installs its dependencies.
 ```R
 #Only if you need to analyse the datasets via RankProd. Run code below in R
@@ -53,9 +55,10 @@ install.packages("gmp", quiet= T)
 install.packages("BiocManager", quiet= T)
 BiocManager::install("RankProd", quiet= T)
 ```
-If running into issues when installing RankProd, devtools or rockchalk on debian or Ubuntu based operating systems run the code below in the terminal assuming you CRAN packages are available in your [repositories](https://cran.r-project.org/)
+### Issues installing dependencies
+If running into issues when installing lme4, devtools or rockchalk on debian or Ubuntu based operating systems. Run the code below in the terminal assuming you CRAN packages are available in your [repositories](https://cran.r-project.org/)
 ```sh
-#Run in a shell terminal
+#Run in a linux terminal- check your packages can be installed with apt-get
 sudo apt-get update #first two not necessary
 sudo apt-get upgrade
 #Dependencies required to install devtools
@@ -64,8 +67,8 @@ sudo apt-get -y install libcurl4-gnutls-dev
 #Requirements to install lme4, nloptr and rockchalk 
 sudo apt-get -y --fix-broken install libarchive13 libjsoncpp25 libproc2-0 librhash0 libuv1 procps #dependencies for R packages
 sudo apt-get -y install r-cran-gmp r-cran-rmpfr libxml2-dev #avoids issues with installing these packages in R
-sudo apt-get install cmake-data #dependency for devtools
-sudo apt-get install cmake
+sudo apt-get -y install cmake-data #dependency for devtools
+sudo apt-get -y install cmake
 sudo apt-get install libssl-dev #another devtools dependency
 R -e 'install.packages("lme4", quietly=T)'  
 R -e 'install.packages("nloptr", quietly=T)'   
