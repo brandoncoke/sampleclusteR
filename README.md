@@ -31,6 +31,7 @@ sampleclusteR requires the following:
 - limma (≥ 3.2)
 - GEOquery (≥ 3.2)
 - devtools (≥ 2.3)
+
 After installing R from CRAN (https://cran.r-project.org/) the dependencies and sampleclusteR can be installed using the R code bellow.
 ```R
 #In the R terminal- install these dependencies
