@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 docker stop $(sudo docker ps -a -q)
 docker rm $(sudo docker ps -a -q)
 docker container ls -a

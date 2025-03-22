@@ -1,14 +1,10 @@
-
-# syntax=docker/dockerfile:1
-#sudo docker build .
-#set image and working directory
 FROM rocker/r-devel
 ARG WHEN
 WORKDIR /home/
-#RUN mkdir /home/
-#copy the R script for dependency install
-#COPY ./docker_install.R /home/
-RUN apt install libarchive13 libjsoncpp25 libproc2-0 librhash0 libuv1 procps cmake-data r-cran-gmp r-cran-rmpfr libxml2-dev cmake
+RUN apt-get update
+RUN apt-get install -y libuv1 libuv1 procps cmake-data 
+RUN apt-get install -y r-cran-gmp r-cran-rmpfr
+RUN apt-get install -y cmake 
 RUN R -e 'install.packages("lme4", quietly=T)'  
 RUN R -e 'install.packages("nloptr", quietly=T)'   
 RUN R -e 'install.packages("rockchalk", quietly=T)'  
@@ -26,6 +22,6 @@ RUN addgroup --system temp_acc \
 RUN chown temp_acc -R /home/
 USER temp_acc
 #Set port for container
-#EXPOSE 3838 #not shiny just CMD
+#EXPOSE 3838 #not shiny just CMD line
 #Exit and load in R
-CMD ["R", "-e", "require("GEOpythia")"]
+CMD ["R", "-e", "require("sampleclusteR")"]
