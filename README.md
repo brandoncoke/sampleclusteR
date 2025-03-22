@@ -25,21 +25,22 @@ Unlike GEOrcale the package does not use a SVM model to automate the selection o
  ## Installation and requirements
 sampleclusteR requires the following:
 - R  (≥ 4.4.3)
-- devtools (≥ 2.3)
 - cluster (≥ 2.0)
 - rockchalk (≥ 1.8)
 - BiocManager (≥ 3.2)
 - limma (≥ 3.2)
 - GEOquery (≥ 3.2)
+- devtools (≥ 2.3)
 After installing R from CRAN (https://cran.r-project.org/) the dependencies and sampleclusteR can be installed using the R code bellow.
 ```R
 #In the R terminal- install these dependencies
-install.packages("devtools", quiet= T)
 install.packages("cluster", quiet= T)
 install.packages("BiocManager", quiet= T)
 install.packages("rockchalk", quiet= T)
 BiocManager::install("limma", quiet= T)
 BiocManager::install("GEOquery", quiet= T)
+#Errors can occur when installing devtools- see next paragraph
+install.packages("devtools", quiet= T)
 #Use devtools to build package
 devtools::install_github("brandoncoke/sampleclusteR")
 ```
@@ -54,10 +55,14 @@ BiocManager::install("RankProd", quiet= T)
 If running into issues when installing RankProd, devtools or rockchalk on debian or Ubuntu based operating systems run the code below in the terminal assuming you CRAN packages are available in your [repositories](https://cran.r-project.org/)
 ```sh
 #Run in a shell terminal
-sudo apt update #first two not necessary
-sudo apt upgrade
-sudo apt-get --fix-broken install libarchive13 libjsoncpp25 libproc2-0 librhash0 libuv1 procps #dependencies for R packages
-sudo apt install r-cran-gmp r-cran-rmpfr libxml2-dev #avoids issues with installing these packages in R
+sudo apt-get update #first two not necessary
+sudo apt-get upgrade
+#Dependencies required to install devtools
+sudo apt-get -y build-dep libcurl4-gnutls-dev
+sudo apt-get -y install libcurl4-gnutls-dev
+#Requirements to install lme4, nloptr and rockchalk 
+sudo apt-get -y --fix-broken install libarchive13 libjsoncpp25 libproc2-0 librhash0 libuv1 procps #dependencies for R packages
+sudo apt-get -y install r-cran-gmp r-cran-rmpfr libxml2-dev #avoids issues with installing these packages in R
 sudo apt-get install cmake-data #dependency for devtools
 sudo apt-get install cmake
 sudo apt-get install libssl-dev #another devtools dependency
