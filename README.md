@@ -62,7 +62,7 @@ If running into issues when installing lme4, devtools or rockchalk on debian or 
 sudo apt-get update #first two not necessary
 sudo apt-get upgrade
 #Dependencies required to install devtools
-sudo apt-get -y r-cran-devtools
+sudo apt-get -y install r-cran-devtools
 #Requirements to install lme4, nloptr and rockchalk 
 sudo apt-get -y --fix-broken install libarchive13 libjsoncpp25 libproc2-0 librhash0 libuv1 procps #dependencies for R packages
 sudo apt-get -y install r-cran-gmp r-cran-rmpfr libxml2-dev #avoids issues with installing these packages in R
