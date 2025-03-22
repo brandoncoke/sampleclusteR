@@ -1,4 +1,4 @@
-# sampleclusteR- commandline interface for large scale GEO dataset metanalysis
+# sampleclusteR- A R package to simiplify the clustering of samples based on their metadata
 
 ## A Quick and efficient way of clustering and analysing samples using .sdrf metadata and GEO metdata
 
@@ -22,27 +22,31 @@ sampleclusteR current features are:
 - Perform large scale meta analysis of GEO data by automating analysis of GEO datasets.
 - Analyse GEO data sets using \emph{limma} or RankProd
 Unlike GEOrcale the package does not use a SVM model to automate the selection of control and treated samples and requires user interaction to select the valid pairwise comparisons
- ## Installation and requirements
+### Installation and requirements
 sampleclusteR requires the following:
 - R  (≥ 4.4.3)
-- devtools (≥ 2.3)
 - cluster (≥ 2.0)
 - rockchalk (≥ 1.8)
 - BiocManager (≥ 3.2)
 - limma (≥ 3.2)
 - GEOquery (≥ 3.2)
+- devtools (≥ 2.3)
+
+### Installing from R console
 After installing R from CRAN (https://cran.r-project.org/) the dependencies and sampleclusteR can be installed using the R code bellow.
 ```R
 #In the R terminal- install these dependencies
-install.packages("devtools", quiet= T)
 install.packages("cluster", quiet= T)
 install.packages("BiocManager", quiet= T)
 install.packages("rockchalk", quiet= T)
 BiocManager::install("limma", quiet= T)
 BiocManager::install("GEOquery", quiet= T)
+#Errors can occur when installing devtools- see next paragraph
+install.packages("devtools", quiet= T)
 #Use devtools to build package
 devtools::install_github("brandoncoke/sampleclusteR")
 ```
+### Using RankProd
 To be able to analyse with RankProd; it requires the installation of the [RankProd package](https://www.bioconductor.org/packages/release/bioc/html/RankProd.html) from Bioconductor. The code below installs its dependencies.
 ```R
 #Only if you need to analyse the datasets via RankProd. Run code below in R
@@ -51,15 +55,20 @@ install.packages("gmp", quiet= T)
 install.packages("BiocManager", quiet= T)
 BiocManager::install("RankProd", quiet= T)
 ```
-If running into issues when installing RankProd, devtools or rockchalk on debian or Ubuntu based operating systems run the code below in the terminal assuming you CRAN packages are available in your [repositories](https://cran.r-project.org/)
+### Issues installing dependencies
+If running into issues when installing lme4, devtools or rockchalk on debian or Ubuntu based operating systems. Run the code below in the terminal assuming you CRAN packages are available in your [repositories](https://cran.r-project.org/)
 ```sh
-#Run in a shell terminal
-sudo apt update #first two not necessary
-sudo apt upgrade
-sudo apt-get --fix-broken install libarchive13 libjsoncpp25 libproc2-0 librhash0 libuv1 procps #dependencies for R packages
-sudo apt install r-cran-gmp r-cran-rmpfr libxml2-dev #avoids issues with installing these packages in R
-sudo apt-get install cmake-data #dependency for devtools
-sudo apt-get install cmake
+#Run in a linux terminal- check your packages can be installed with apt-get
+sudo apt-get update #first two not necessary
+sudo apt-get upgrade
+#Dependencies required to install devtools
+sudo apt-get -y build-dep libcurl4-gnutls-dev
+sudo apt-get -y install libcurl4-gnutls-dev
+#Requirements to install lme4, nloptr and rockchalk 
+sudo apt-get -y --fix-broken install libarchive13 libjsoncpp25 libproc2-0 librhash0 libuv1 procps #dependencies for R packages
+sudo apt-get -y install r-cran-gmp r-cran-rmpfr libxml2-dev #avoids issues with installing these packages in R
+sudo apt-get -y install cmake-data #dependency for devtools
+sudo apt-get -y install cmake
 sudo apt-get install libssl-dev #another devtools dependency
 R -e 'install.packages("lme4", quietly=T)'  
 R -e 'install.packages("nloptr", quietly=T)'   
@@ -74,11 +83,5 @@ R -e 'install.packages("devtools", quietly=T)'
 R -e 'devtools::install_github("brandoncoke/sampleclusteR")'
 #Run in a linux terminal
 ```
-Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory. Ensure your current directory is the Git repository. Once the docker image is built; a tar directory (sampleclusteR_docker_image.tar.gz) will be created and be used to load the package and its dependencies using the code below in the linux terminal.
-```sh
-bash docker_containerisation/build_command.sh #this will create the sampleclusteR_docker_image.tar.gz image
-docker load < sampleclusteR_docker_image.tar.gz #may require super user access- if so append sudo or doas or sudo !! after encountering an error
-docker volume create sampleclusteR_data #to enable you to save the csvs
-docker run -ti -v /home/:sampleclusteR_data sampleclusteR R #then type require("sampleclusteR")
-#when saving csvs in ~ will be /var/lib/docker/volumes/sampleclusteR_data on the host machine
-```
+### Installing and running docker image
+Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory. Ensure your current directory is set to the docker_containerisation directory and the use the build__command.sh script to create and image and tar.gz directory of the image.
