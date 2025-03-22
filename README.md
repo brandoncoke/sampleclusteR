@@ -83,6 +83,7 @@ R -e 'install.packages("devtools", quietly=T)'
 R -e 'devtools::install_github("brandoncoke/sampleclusteR")'
 #Run in a linux terminal
 ```
+### Installing and running docker image
 Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory. Ensure your current directory is the Git repository. Once the docker image is built; a tar directory (sampleclusteR_docker_image.tar.gz) will be created and be used to load the package and its dependencies using the code below in the linux terminal.
 ```sh
 bash docker_containerisation/build_command.sh #this will create the sampleclusteR_docker_image.tar.gz image
