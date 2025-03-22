@@ -64,11 +64,7 @@ sudo apt-get upgrade
 #Dependencies required to install devtools
 sudo apt-get -y install r-cran-devtools
 #Requirements to install lme4, nloptr and rockchalk 
-sudo apt-get -y --fix-broken install libarchive13 libjsoncpp25 libproc2-0 librhash0 libuv1 procps #dependencies for R packages
-sudo apt-get -y install r-cran-gmp r-cran-rmpfr libxml2-dev #avoids issues with installing these packages in R
-sudo apt-get -y install cmake-data #dependency for devtools
-sudo apt-get -y install cmake
-sudo apt-get install libssl-dev #another devtools dependency
+sudo apt-get -y install r-cran-rockchalk r-cran-lme4 r-cran-nloptr
 R -e 'install.packages("lme4", quietly=T)'  
 R -e 'install.packages("nloptr", quietly=T)'   
 R -e 'install.packages("rockchalk", quietly=T)'  
