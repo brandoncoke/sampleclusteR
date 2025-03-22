@@ -41,7 +41,7 @@ install.packages("BiocManager", quiet= T)
 install.packages("rockchalk", quiet= T)
 BiocManager::install("limma", quiet= T)
 BiocManager::install("GEOquery", quiet= T)
-#Errors can occur when installing devtools- see next paragraph
+#Errors can occur when installing devtools- see 'Issues installing dependencies' section
 install.packages("devtools", quiet= T)
 #Use devtools to build package
 devtools::install_github("brandoncoke/sampleclusteR")
@@ -65,6 +65,9 @@ sudo apt-get upgrade
 sudo apt-get -y install r-cran-devtools
 #Requirements to install lme4, nloptr and rockchalk 
 sudo apt-get -y install r-cran-rockchalk r-cran-lme4 r-cran-nloptr
+#GEOquery install
+sudo apt-get -y install r-bioc-geoquery
+#Then install R package dependencies
 R -e 'install.packages("lme4", quietly=T)'  
 R -e 'install.packages("nloptr", quietly=T)'   
 R -e 'install.packages("rockchalk", quietly=T)'  
@@ -74,7 +77,8 @@ R -e 'install.packages("BiocManager", quietly=T)'
 R -e 'BiocManager::install("RankProd", force=T)'
 R -e 'BiocManager::install("GEOquery", force=T)'
 R -e 'BiocManager::install("limma", force=T)'
-R -e 'install.packages("devtools", quietly=T)'  
+R -e 'install.packages("devtools", quietly=T)'
+#Install package directly from the git repo
 R -e 'devtools::install_github("brandoncoke/sampleclusteR")'
 #Run in a linux terminal
 ```
