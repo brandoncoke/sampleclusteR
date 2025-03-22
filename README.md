@@ -84,11 +84,4 @@ R -e 'devtools::install_github("brandoncoke/sampleclusteR")'
 #Run in a linux terminal
 ```
 ### Installing and running docker image
-Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory. Ensure your current directory is the Git repository. Once the docker image is built; a tar directory (sampleclusteR_docker_image.tar.gz) will be created and be used to load the package and its dependencies using the code below in the linux terminal.
-```sh
-bash docker_containerisation/build_command.sh #this will create the sampleclusteR_docker_image.tar.gz image
-docker load < sampleclusteR_docker_image.tar.gz #may require super user access- if so append sudo or doas or sudo !! after encountering an error
-docker volume create sampleclusteR_data #to enable you to save the csvs
-docker run -ti -v /home/:sampleclusteR_data sampleclusteR R #then type require("sampleclusteR")
-#when saving csvs in ~ will be /var/lib/docker/volumes/sampleclusteR_data on the host machine
-```
+Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory. Ensure your current directory is set to the docker_containerisation directory and the use the build__command.sh script to create and image and tar.gz directory of the image.
