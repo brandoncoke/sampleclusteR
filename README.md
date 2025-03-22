@@ -1,4 +1,4 @@
-# sampleclusteR- commandline interface for large scale GEO dataset metanalysis
+# sampleclusteR- A R package to simiplify the clustering of samples based on their metadata
 
 ## A Quick and efficient way of clustering and analysing samples using .sdrf metadata and GEO metdata
 
