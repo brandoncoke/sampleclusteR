@@ -69,6 +69,7 @@ sudo apt-get -y install r-cran-devtools
 #Requirements to install lme4, nloptr and rockchalk 
 sudo apt-get -y install r-cran-rockchalk r-cran-lme4 r-cran-nloptr
 #GEOquery install
+sudo apt -y install r-bioc-biobase
 sudo apt-get -y install r-bioc-geoquery
 #Then install R package dependencies
 R -e 'install.packages("lme4", quietly=T)'  
