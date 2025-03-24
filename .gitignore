@@ -2,3 +2,4 @@
 *.pper
 /.Rproj.user
 *.gz
+*.RDS
