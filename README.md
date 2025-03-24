@@ -35,7 +35,7 @@ sampleclusteR requires the following:
 - OPTIONAL RankProd (≥ 3.2)
 
 ### Installing from R console
-After installing R from CRAN (https://cran.r-project.org/) the dependencies and sampleclusteR can be installed using the R code bellow.
+After installing R from CRAN (https://cran.r-project.org/) the dependencies and sampleclusteR can be installed using the R code bellow. Issues installing rockchalk, cluster and GEOquery are common when using linux. See the 'Issues installing dependencies' section.
 ```R
 #In the R terminal- install these dependencies
 install.packages("cluster", quiet= T)
