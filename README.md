@@ -16,10 +16,11 @@ Finally, sampleclusteR enables users to automate the generation of DEGs list for
 ```R
 sampleclusteR::supervised.analysis(GEO_id= "GSE130402", meta_data_and_combined= T, limma_or_rankprod = "limma")
 ```
+### Features
 sampleclusteR current features are:
--Can cluster Sample and Data Relationship Format (.sdrf) formatted metadata, for example metadata from ArrayExpress and PRIDE. 
--Can cluster datasets with user specified metadata. 
--Able to be run on the command line for more concise workflows 
+- Can cluster Sample and Data Relationship Format (.sdrf) formatted metadata, for example metadata from ArrayExpress and PRIDE. 
+- Can cluster datasets with user specified metadata. 
+- Able to be run on the command line for more concise workflows 
 - Automatically identify control and treated samples and correctly match them.
 - Analyse GEO data sets using \emph{limma} or RankProd and produce a DEG list.
 ### Installation and requirements
