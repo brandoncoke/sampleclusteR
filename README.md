@@ -59,7 +59,7 @@ install.packages("BiocManager", quiet= T)
 BiocManager::install("RankProd", quiet= T)
 ```
 ### Issues installing dependencies
-If running into issues when installing lme4, devtools or rockchalk on debian or Ubuntu based operating systems. Run the code below in the terminal assuming you CRAN packages are available in your [repositories](https://cran.r-project.org/). You need to add the CRAN repository to enable you to install r-cran and r-bioc packages.
+If running into issues when installing lme4, GEOquery, devtools and/or rockchalk on debian or Ubuntu based operating systems. Run the code below in the terminal assuming you CRAN packages are available in your [repositories](https://cran.r-project.org/). You need to add the CRAN repository to enable you to install r-cran and r-bioc packages.
 ```sh
 #Run in a linux terminal- check your packages can be installed with apt-get
 sudo apt-get update #first two not necessary
