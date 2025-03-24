@@ -27,4 +27,4 @@ WORKDIR /home/
 #Set port for container
 #EXPOSE 3838 #not shiny just CMD line
 #Exit and load in R
-CMD ["R", "-e", "require("sampleclusteR")"]
+#CMD ["R", "-e", "require("sampleclusteR")"]
