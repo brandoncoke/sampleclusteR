@@ -30,9 +30,9 @@ sampleclusteR requires the following:
 - rockchalk (≥ 1.8)
 - BiocManager (≥ 3.2)
 - limma (≥ 3.2)
+- Biobase (≥ 3.2)
 - GEOquery (≥ 3.2)
 - devtools (≥ 2.3)
-- Biobase (≥ 3.2)
 - OPTIONAL RankProd (≥ 3.2)
 
 ### Installing from R console
