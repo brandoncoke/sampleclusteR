@@ -52,11 +52,6 @@ semi.supervised.analysis= function(GEO_id,  path="~/", platform= "NONE", meta_da
     comb_titles= combined_table[,unique_features]
   }
   comb_clusters= list(comb_titles[comb_groups == 1])
-  if(length(unique(comb_groups_uni)) > 1){ #non-ideal. Cluster objects are lists of lists- so need to be appended sequentially. Also cannot just NA then for loop 1:ect as NA will be included in list.
-    for(i in 2:length(unique(comb_groups_uni))){
-      comb_clusters= c(list(comb_titles[comb_groups == i]), comb_clusters)
-    }
-  }
   comb_tables_managable= as.character(lapply(comb_clusters, function(x){
     x= unlist(x)
     paste(gsm.title.managable(x[1]), collapse= "_")
