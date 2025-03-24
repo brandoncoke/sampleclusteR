@@ -13,6 +13,7 @@ get.cluster.titles= function(exp_design_frame){# bodge pls fix.
     labels_of_a_cluster= gsub("-shrna[0-9]$", "_shRNA", labels_of_a_cluster, ignore.case = T)
     labels_of_a_cluster= gsub("-shrna[0-9]$", "_shRNA", labels_of_a_cluster, ignore.case = T)
     labels_of_a_cluster= gsub("control[0-9]$", "control", labels_of_a_cluster, ignore.case = T)#
+    labels_of_a_cluster= gsub("spheres", "sphere", labels_of_a_cluster, ignore.case = T)#
     labels_of_a_cluster= gsub("change[0-9]$", "change", labels_of_a_cluster, ignore.case = T)
     labels_of_a_cluster= gsub("knockdown[0-9]$", "knockdown", labels_of_a_cluster, ignore.case = T)
     labels_of_a_cluster= gsub("24h", "24_hours", labels_of_a_cluster, ignore.case = T)
