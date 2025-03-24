@@ -9,4 +9,5 @@ docker build -t samplecluster . #cannot name image with upper case- hence all lo
 docker save --output="sampleclusteR_docker_container.tar.gz" samplecluster
 #Below loads the samplecluster image and then runs it with local directory- loads with temp_acc user.
 docker load < sampleclusteR_docker_container.tar.gz
-docker run -ti -v /home:/home samplecluster R
+mkdir -p sampleclusteR_directory
+docker run -ti -v .:/home samplecluster R #run image and use current directory as the home for the image
