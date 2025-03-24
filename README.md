@@ -8,20 +8,20 @@ To cluster GEO dataseries and produce a table with samples and their clusters su
 sampleclusteR::geo.cluster("GSE84881")
 ```
 Conversely to cluster an ArrayExpress dataset with its metadata formatted as a Sample and Data Relationship Format table; for example the metadata for 
-E-MTAB-11935; this can be achieved with
+E-MTAB-11935 the R code below clusters the samples and produces a concise output.
 ```R
-sampleclusteR::ArrayExpress.cluster("https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/935/E-MTAB-11935/Files/E-MTAB-11935.sdrf.txt")
+sampleclusteR::sdrf.cluster("https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/935/E-MTAB-11935/Files/E-MTAB-11935.sdrf.txt")
 ```
 Finally, sampleclusteR enables users to automate the generation of DEGs list for a given GEO data set via the supervised.analysis.
 ```R
 sampleclusteR::supervised.analysis(GEO_id= "GSE130402", meta_data_and_combined= T, limma_or_rankprod = "limma")
 ```
 sampleclusteR current features are:
-- Automatically cluster GEO, ArrayExpress  and user provided metadata on the command-line.
+-Can cluster Sample and Data Relationship Format (.sdrf) formatted metadata, for example metadata from ArrayExpress and PRIDE. 
+-Can cluster datasets with user specified metadata. 
+-Able to be run on the command line for more concise workflows 
 - Automatically identify control and treated samples and correctly match them.
-- Perform large scale meta analysis of GEO data by automating analysis of GEO datasets.
-- Analyse GEO data sets using \emph{limma} or RankProd
-Unlike GEOrcale the package does not use a SVM model to automate the selection of control and treated samples and requires user interaction to select the valid pairwise comparisons
+- Analyse GEO data sets using \emph{limma} or RankProd and produce a DEG list.
 ### Installation and requirements
 sampleclusteR requires the following:
 - R  (≥ 4.4.3)
@@ -31,6 +31,7 @@ sampleclusteR requires the following:
 - limma (≥ 3.2)
 - GEOquery (≥ 3.2)
 - devtools (≥ 2.3)
+- OPTIONAL RankProd (≥ 3.2)
 
 ### Installing from R console
 After installing R from CRAN (https://cran.r-project.org/) the dependencies and sampleclusteR can be installed using the R code bellow.
@@ -47,7 +48,7 @@ install.packages("devtools", quiet= T)
 devtools::install_github("brandoncoke/sampleclusteR")
 ```
 ### Using RankProd
-To be able to analyse with RankProd; it requires the installation of the [RankProd package](https://www.bioconductor.org/packages/release/bioc/html/RankProd.html) from Bioconductor. The code below installs its dependencies.
+To be able to analyse with RankProd; it requires the installation of the [RankProd package](https://www.bioconductor.org/packages/release/bioc/html/RankProd.html) from Bioconductor. The code below installs its dependencies using the R console.
 ```R
 #Only if you need to analyse the datasets via RankProd. Run code below in R
 install.packages("Rmpfr", quiet= T)
@@ -56,7 +57,7 @@ install.packages("BiocManager", quiet= T)
 BiocManager::install("RankProd", quiet= T)
 ```
 ### Issues installing dependencies
-If running into issues when installing lme4, devtools or rockchalk on debian or Ubuntu based operating systems. Run the code below in the terminal assuming you CRAN packages are available in your [repositories](https://cran.r-project.org/)
+If running into issues when installing lme4, devtools or rockchalk on debian or Ubuntu based operating systems. Run the code below in the terminal assuming you CRAN packages are available in your [repositories](https://cran.r-project.org/). You need to add the CRAN repository to enable you to install r-cran and r-bioc packages.
 ```sh
 #Run in a linux terminal- check your packages can be installed with apt-get
 sudo apt-get update #first two not necessary
@@ -83,4 +84,4 @@ R -e 'devtools::install_github("brandoncoke/sampleclusteR")'
 #Run in a linux terminal
 ```
 ### Installing and running docker image
-Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory. Ensure your current directory is set to the docker_containerisation directory and the use the build__command.sh script to create and image and tar.gz directory of the image.
+Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory along with the Dockerfile. Ensure your current directory is set to the docker_containerisation directory and the use the build_command.sh script to create and image and tar.gz directory of the image.
