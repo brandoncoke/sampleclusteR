@@ -1,5 +1,5 @@
-#GEO_id="GSE7699"; platform= "NONE"; words_only= F
-geo.cluster= function(GEO_id, words_only= F, platform= "NONE"){
+#GEO_id="GSE7699"; platform= "NONE"
+geo.cluster= function(GEO_id, platform= "NONE"){
   message(paste("Analysing", GEO_id)) #user aware of dataset analysed
   gset= obtain.gset(GEO_id, platform= platform) #getting expression dataset
   if(length(gset@phenoData@data[["geo_accession"]]) < 2 ){ #quick exit if only one or 2 samples present- limma reqs 2 reps in at least 2 groups
@@ -10,10 +10,10 @@ geo.cluster= function(GEO_id, words_only= F, platform= "NONE"){
   }
   combined_table= get.combined.table(gset,T)
   gsm_titles= gset@phenoData@data$title #origianlly due to get.cluster.titles reusing names of variables- avoid at all costs
-  title_clusters= title.clustering(gsm_titles, words_only= words_only)
+  title_clusters= title.clustering(gsm_titles)
   #to many clusters- might be due to junk patient ids
   if(length(title_clusters) > nrow(combined_table)*.75){
-    title_clusters= title.clustering(gsm_titles, words_only= T)
+    title_clusters= title.clustering(gsm_titles)
   }
   #instances where titles are all unique- so cannot cluster
   if(length(title_clusters) > (nrow(combined_table)-1)){
