@@ -3,18 +3,17 @@
 ## A Quick and efficient way of clustering and analysing samples using .sdrf metadata and GEO metdata
 
 sampleclusteR allows users to quickly analyse datasets from Gene Expression Omnibus (GEO) and ArrayExpress metadata sets (via Sample and Data Relationship Format tables (.sdrf) using a command line interface.
-To cluster GEO dataseries and produce a table with samples and their clusters such as GSE84881 a user can use
+To cluster GEO dataseries and produce a table with samples and their clusters a user can use the geo.cluster function. Below is an example for the GSE84881 dataseries. 
 ```R
-sampleclusteR::geo.cluster("GSE84881")
+sampleclusteR::geo.cluster(GEO_id= "GSE84881", platform= "GPL570")
 ```
-Conversely to cluster an ArrayExpress dataset with its metadata formatted as a Sample and Data Relationship Format table; for example the metadata for 
-E-MTAB-11935 the R code below clusters the samples and produces a concise output.
+Conversely to cluster a .sdrf formatted metadata table- the sdrf.cluster function can be used. Below is an example use case for an ArrayExpress dataset- E-MTAB-11935. The output will be a more concise metadata table with the samples' groups.
 ```R
 sampleclusteR::sdrf.cluster("https://ftp.ebi.ac.uk/biostudies/fire/E-MTAB-/935/E-MTAB-11935/Files/E-MTAB-11935.sdrf.txt")
 ```
 Finally, sampleclusteR enables users to automate the generation of DEGs list for a given GEO data set via the supervised.analysis.
 ```R
-sampleclusteR::supervised.analysis(GEO_id= "GSE130402", meta_data_and_combined= T, limma_or_rankprod = "limma")
+sampleclusteR::supervised.analysis(GEO_id= "GSE130402", meta_data_and_combined= T, limma_or_rankprod = "limma", path="~/")
 ```
 ### Features
 sampleclusteR current features are:
@@ -36,7 +35,7 @@ sampleclusteR requires the following:
 - OPTIONAL RankProd (≥ 3.2)
 
 ### Installing from R console
-After installing R from CRAN (https://cran.r-project.org/) the dependencies and sampleclusteR can be installed using the R code bellow.
+After installing R from CRAN (https://cran.r-project.org/) the dependencies and sampleclusteR can be installed using the R code bellow. Issues installing rockchalk, cluster and GEOquery are common when using linux. See the 'Issues installing dependencies' section.
 ```R
 #In the R terminal- install these dependencies
 install.packages("cluster", quiet= T)
