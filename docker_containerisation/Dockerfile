@@ -12,6 +12,7 @@ RUN apt-get install -y r-cran-biocmanager
 RUN apt-get install -y r-cran-xml2
 RUN apt-get install -y r-cran-devtools    
 RUN R -e 'BiocManager::install("RankProd", force=T)'
+RUN apt-get install -y r-bioc-biobase
 RUN apt-get install -y r-bioc-geoquery 
 #RUN R -e 'BiocManager::install("GEOquery", force=T)'
 RUN apt-get install -y r-bioc-limma
