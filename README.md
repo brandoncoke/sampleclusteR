@@ -56,8 +56,6 @@ install.packages("BiocManager", quiet= T)
 install.packages("rockchalk", quiet= T)
 BiocManager::install("limma", quiet= T)
 BiocManager::install("GEOquery", quiet= T)
-#Errors can occur when installing devtools- see 'Issues installing dependencies' section
-install.packages("devtools", quiet= T)
 install.packages(file.choose()) #if you need a GUI to point to the sampleclusteR_1.00.zip file
 #USE THIS IF THE REPO WAS CLONNED TO YOUR HOME DIRECTORY
 install.packages(~/sampleclusteR/sampleclusteR_1.00.zip)
@@ -102,3 +100,5 @@ R -e 'devtools::install_github("brandoncoke/sampleclusteR")'
 ```
 ### Installing and running docker image
 Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory along with the Dockerfile. Ensure your current directory is set to the docker_containerisation directory and the use the build_command.sh script to create and image and tar.gz directory of the image.
+### Example analysis
+The example_analysis.R showcases a use case for the package to analyse 4 Wnt peturbation datasets and outputs a heatmap, GO enrichment chart and Venn diagram showing the overlap in differentially expressed genes.
