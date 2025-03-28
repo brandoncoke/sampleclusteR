@@ -48,6 +48,20 @@ install.packages("devtools", quiet= T)
 #Use devtools to build package
 devtools::install_github("brandoncoke/sampleclusteR")
 ```
+Alternatively you can install the package without using devtools which can have compatibility issues. To do this use the code below.
+```R
+#In the R terminal- install these dependencies
+install.packages("cluster", quiet= T)
+install.packages("BiocManager", quiet= T)
+install.packages("rockchalk", quiet= T)
+BiocManager::install("limma", quiet= T)
+BiocManager::install("GEOquery", quiet= T)
+#Errors can occur when installing devtools- see 'Issues installing dependencies' section
+install.packages("devtools", quiet= T)
+install.packages(file.choose()) #if you need a GUI to point to the sampleclusteR_1.00.zip file
+#USE THIS IF THE REPO WAS CLONNED TO YOUR HOME DIRECTORY
+install.packages(~/sampleclusteR/sampleclusteR_1.00.zip)
+```
 ### Using RankProd
 To be able to analyse with RankProd; it requires the installation of the [RankProd package](https://www.bioconductor.org/packages/release/bioc/html/RankProd.html) from Bioconductor. The code below installs its dependencies using the R console.
 ```R
