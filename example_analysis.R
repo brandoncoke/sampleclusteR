@@ -12,9 +12,9 @@ if("ggVennDiagram" %in% rownames(installed.packages()) == FALSE){
 require(ggplot2)
 if("devtools" %in% rownames(installed.packages()) == FALSE){
   install.packages("devtools")}
-if("GEOcluster" %in% rownames(installed.packages()) == FALSE){
-  devtools::install_github("brandoncoke/GEOcluster,")}
-require(GEOcluster)
+if("sampleclusteR" %in% rownames(installed.packages()) == FALSE){
+  devtools::install_github("brandoncoke/sampleclusteR,")}
+require(sampleclusteR)
 #saving in the only place that will be present the working directory
 csv_loc= "~/"
 #Obtain DEG lists
