@@ -23,12 +23,20 @@ GSEs_interested_in= c("GSE17385",
                       "GSE57728",
                       "GSE44097")
 #time to analyse data series
-lapply(GSEs_interested_in,
-       automated.analysis,
-       path= csv_loc,
-       platform= "GPL570",
-       limma_or_rankprod= "limma"
-)
+#lapply(GSEs_interested_in,
+#       automated.analysis,
+#       path= csv_loc,
+#       platform= "GPL570",
+#       limma_or_rankprod= "limma"
+#)
+for(study in GSEs_interested_in){
+  print(paste("Analysing ",
+              study))
+  automated.analysis(study,
+                     platform = "GPL570",
+                     limma_or_rankprod= "limma")
+}
+
 #speedier on mac or linux (even WSL on windows) with the code below
 #assuming you have 4 threads for forking- i.e. don't run this on
 # a cheap computer
@@ -48,9 +56,10 @@ my_csvs= my_csvs[grepl(paste0(GSEs_interested_in,collapse =  "|"), my_csvs) &
 #here are the csvs from the analysis
 my_csvs
 #Selecting a subset of the csvs
+list.files()
 csvs_interested_in= c("GSE17385_pKLO_GFP_control_vs_pKLO_beta_catenin_shRNA",
-                      "GSE57728_Control_siRNA_at_T48_AsPC_1_transfected_with_20nM_vs_CTNNB1_siRNA_at_T48_AsPC_1_transfected_with_20nM_",
-                      "GSE56896_LS174T_ET_1_vs_LS174T_NET_1",
+                      "GSE57728_Control_siRNA_at_T48_AsPC_1_transfected_with_20nM_vs_CTNNB1_siRNA_at_T48_AsPC_1_transfected_with_20nM",
+                      "GSE56896_LS174T_ET_1_vs_LS174T_NET",
                       "GSE44097_SW480_siRNA_mock_treated_vs_SW480_siRNA_treated"
 )
 #titles automatically generated- and so may cut early to ensure file name
