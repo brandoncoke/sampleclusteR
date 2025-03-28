@@ -48,7 +48,7 @@ install.packages("devtools", quiet= T)
 #Use devtools to build package
 devtools::install_github("brandoncoke/sampleclusteR")
 ```
-Alternatively you can install the package without using devtools which can have compatibility issues. To do this use the code below.
+Alternatively you can install the package without using devtools which can have compatibility issues. To do this use the code below and install the packag using sampleclusteR_1.00.zip compressed file.
 ```R
 #In the R terminal- install these dependencies
 install.packages("cluster", quiet= T)
@@ -99,6 +99,6 @@ R -e 'devtools::install_github("brandoncoke/sampleclusteR")'
 #Run in a linux terminal
 ```
 ### Installing and running docker image
-Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory along with the Dockerfile. Ensure your current directory is set to the docker_containerisation directory and the use the build_command.sh script to create and image and tar.gz directory of the image.
+Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory along with the Dockerfile. Ensure your current directory is set to the docker_containerisation directory and the use the build_command.sh script to create and image and tar.gz compressed file of the image.
 ### Example analysis
 The example_analysis.R showcases a use case for the package to analyse 4 Wnt peturbation datasets and outputs a heatmap, GO enrichment chart and Venn diagram showing the overlap in differentially expressed genes.
