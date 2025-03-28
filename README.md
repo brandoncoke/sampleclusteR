@@ -48,6 +48,18 @@ install.packages("devtools", quiet= T)
 #Use devtools to build package
 devtools::install_github("brandoncoke/sampleclusteR")
 ```
+Alternatively you can install the package without using devtools which can have compatibility issues. To do this use the code below and install the packag using sampleclusteR_1.00.zip compressed file.
+```R
+#In the R terminal- install these dependencies
+install.packages("cluster", quiet= T)
+install.packages("BiocManager", quiet= T)
+install.packages("rockchalk", quiet= T)
+BiocManager::install("limma", quiet= T)
+BiocManager::install("GEOquery", quiet= T)
+install.packages(file.choose()) #if you need a GUI to point to the sampleclusteR_1.00.zip file
+#USE THIS IF THE REPO WAS CLONNED TO YOUR HOME DIRECTORY
+install.packages(~/sampleclusteR/sampleclusteR_1.00.zip)
+```
 ### Using RankProd
 To be able to analyse with RankProd; it requires the installation of the [RankProd package](https://www.bioconductor.org/packages/release/bioc/html/RankProd.html) from Bioconductor. The code below installs its dependencies using the R console.
 ```R
@@ -87,4 +99,6 @@ R -e 'devtools::install_github("brandoncoke/sampleclusteR")'
 #Run in a linux terminal
 ```
 ### Installing and running docker image
-Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory along with the Dockerfile. Ensure your current directory is set to the docker_containerisation directory and the use the build_command.sh script to create and image and tar.gz directory of the image.
+Finally, a docker image can be built to run a containerised instance of the package. Ensure docker is installed (e.g. apt install docker or download [here](https://www.docker.com/)). The script to build the docker image can be located in the docker_containerisation directory along with the Dockerfile. Ensure your current directory is set to the docker_containerisation directory and the use the build_command.sh script to create and image and tar.gz compressed file of the image.
+### Example analysis
+The example_analysis.R showcases a use case for the package to analyse 4 Wnt peturbation datasets and outputs a heatmap, GO enrichment chart and Venn diagram showing the overlap in differentially expressed genes.
